@@ -26,6 +26,20 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello World!' });
 });
 
+app.get('/api/restaurants', async (req, res) => {
+  try {
+    const sql = `
+    select *
+      from "restaurants"
+    `;
+    const result = await db.query(sql);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({error: 'an unexpected error occured'});
+  }
+})
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
