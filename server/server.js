@@ -22,10 +22,6 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello World!' });
-});
-
 app.get('/api/restaurants', async (req, res) => {
   try {
     const sql = `
@@ -38,7 +34,43 @@ app.get('/api/restaurants', async (req, res) => {
     console.error(err);
     res.status(500).json({error: 'an unexpected error occured'});
   }
-})
+});
+
+app.get('/api/restaurants/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id < 1) {
+      res.status(400).json({error: 'id must be a positive integer'});
+    }
+    const sql = `
+    select * from restaurants
+      where "id" = $1
+    `;
+    const params = [id];
+    const result = await db.query(sql, params);
+    res.json(result.rows[0]);
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({error: 'an unexpected error has occured'});
+  }
+});
+
+app.post('/api/restaurants', async (req, res) => {
+  try {
+    const { name, location, priceRange } = req.body;
+    const sql = `
+    insert into "restaurants" ("name", "location", "priceRange")
+      values ($1, $2, $3)
+      returning *
+    `;
+    const params = [name, location, priceRange];
+    const result = await db.query(sql, params);
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({error: 'an unexpected error has occured'});
+  }
+});
 
 app.use(errorMiddleware);
 
