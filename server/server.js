@@ -117,14 +117,28 @@ app.patch('/api/restaurants/:id', async (req, res) => {
   }
 });
 
-// app.delete('/api/restaurants/:id', (req, res) => {
-//   try {
-//     const sql
-//   } catch(err) {
-//     console.error(err);
-//     res.status(500).json({error: 'an unexpected error has occured'});
-//   }
-// });
+app.delete('/api/restaurants/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      res.status(400).json({error: 'invalid id'});
+    }
+    const sql = `
+    delete from "restaurants"
+      where "id" = $1
+      returning *
+    `;
+    const params = [id]
+    const result = await db.query(sql, params);
+    if (!result.rows[0]) {
+      res.status(404).json({error: 'deleted grade not found'});
+    }
+    res.json(result.rows[0]);
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({error: 'an unexpected error has occured'});
+  }
+});
 
 app.use(errorMiddleware);
 
