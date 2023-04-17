@@ -18,9 +18,11 @@ CREATE TABLE "public"."restaurants" (
 
 CREATE TABLE "public"."reviews" (
 	"id"            serial   NOT NULL,
-	"restaurant.id" serial   NOT NULL,
+	"restaurant.id" int   NOT NULL,
 	"name"          text     NOT NULL,
 	"review"        text     NOT NULL,
 	"rating"        int      NOT NULL check("rating" >= 1 and "rating" <=5),
   PRIMARY KEY ("id")
+  FOREIGN KEY ("restaurant.id")
+    REFERENCES "restaurants"("id")
 );

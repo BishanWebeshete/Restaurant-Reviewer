@@ -22,7 +22,7 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/restaurants', async (req, res) => {
+app.get('/api/restaurants', async (req, res, next) => {
   try {
     const sql = `
     select *
@@ -31,17 +31,15 @@ app.get('/api/restaurants', async (req, res) => {
     const result = await db.query(sql);
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({error: 'an unexpected error occured'});
+    next(err);
   }
 });
 
-app.get('/api/restaurants/:id', async (req, res) => {
+app.get('/api/restaurants/:id', async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id) || id < 1) {
-      res.status(400).json({error: 'id must be a positive integer'});
-      return;
+      throw new ClientError(400, 'id must be a positive integer');
     }
     const sql = `
     select * from restaurants
@@ -50,26 +48,22 @@ app.get('/api/restaurants/:id', async (req, res) => {
     const params = [id];
     const result = await db.query(sql, params);
     if(!result.rows[0]) {
-      res.status(400).json({error: 'this id does not exist'});
-      return;
+      throw new ClientError(400, 'this id does not exist');
     }
     res.json(result.rows[0]);
   } catch(err) {
-    console.error(err);
-    res.status(500).json({error: 'an unexpected error has occured'});
+    next(err);
   }
 });
 
-app.post('/api/restaurants', async (req, res) => {
+app.post('/api/restaurants', async (req, res, next) => {
   try {
     const { name, location, priceRange } = req.body;
     if (!name || !location || !priceRange) {
-      res.status(400).json({error: 'name, location, and priceRange are required'});
-      return;
+      throw new ClientError(400, 'name, location, and priceRange are required');
     }
     if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
-      res.status(400).json({error: 'invalid input on either name, location, or priceRange'});
-      return;
+      throw new ClientError(400, 'invalid input on either name, location, or priceRange');
     }
     const sql = `
     insert into "restaurants" ("name", "location", "priceRange")
@@ -80,22 +74,19 @@ app.post('/api/restaurants', async (req, res) => {
     const result = await db.query(sql, params);
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({error: 'an unexpected error has occured'});
+    next(err);
   }
 });
 
-app.patch('/api/restaurants/:id', async (req, res) => {
+app.put('/api/restaurants/:id', async (req, res, next) => {
   try {
     const {name, location, priceRange} = req.body;
     if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
-      res.status(400).json({ error: 'name, location, or priceRange have invalid inputs' });
-      return;
+      throw new ClientError(400, 'name, location, or priceRange have invalid inputs' );
     }
     const id = Number(req.params.id);
     if(!Number.isInteger(id) || id < 1) {
-      res.status(400).json({error: 'id must be a positive integer'});
-      return;
+      throw new ClientError(400, 'id must be a positive integer');
     }
     const sql = `
     update "restaurants"
@@ -108,20 +99,19 @@ app.patch('/api/restaurants/:id', async (req, res) => {
     const params = [name, location, priceRange, id];
     const result = await db.query(sql, params);
     if(!result.rows[0]) {
-      res.status(400).json({error: 'this id does not exist'});
+      throw new ClientError(400, 'this id does not exist');
     }
     res.json(result.rows[0]);
   } catch(err) {
-    console.error(err);
-    res.status(500).json({error: 'an unexpected error has occured'});
+    next(err);
   }
 });
 
-app.delete('/api/restaurants/:id', async (req, res) => {
+app.delete('/api/restaurants/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     if (!id) {
-      res.status(400).json({error: 'invalid id'});
+      throw new ClientError(400, 'invalid id');
     }
     const sql = `
     delete from "restaurants"
@@ -131,12 +121,11 @@ app.delete('/api/restaurants/:id', async (req, res) => {
     const params = [id]
     const result = await db.query(sql, params);
     if (!result.rows[0]) {
-      res.status(404).json({error: 'deleted grade not found'});
+      throw new ClientError(400, 'deleted grade not found');
     }
     res.json(result.rows[0]);
   } catch(err) {
-    console.error(err);
-    res.status(500).json({error: 'an unexpected error has occured'});
+    next(err);
   }
 });
 
