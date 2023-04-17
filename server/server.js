@@ -41,6 +41,7 @@ app.get('/api/restaurants/:id', async (req, res) => {
     const id = Number(req.params.id);
     if (!Number.isInteger(id) || id < 1) {
       res.status(400).json({error: 'id must be a positive integer'});
+      return;
     }
     const sql = `
     select * from restaurants
@@ -48,6 +49,10 @@ app.get('/api/restaurants/:id', async (req, res) => {
     `;
     const params = [id];
     const result = await db.query(sql, params);
+    if(!result.rows[0]) {
+      res.status(400).json({error: 'this id does not exist'});
+      return;
+    }
     res.json(result.rows[0]);
   } catch(err) {
     console.error(err);
@@ -58,6 +63,14 @@ app.get('/api/restaurants/:id', async (req, res) => {
 app.post('/api/restaurants', async (req, res) => {
   try {
     const { name, location, priceRange } = req.body;
+    if (!name || !location || !priceRange) {
+      res.status(400).json({error: 'name, location, and priceRange are required'});
+      return;
+    }
+    if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
+      res.status(400).json({error: 'invalid input on either name, location, or priceRange'});
+      return;
+    }
     const sql = `
     insert into "restaurants" ("name", "location", "priceRange")
       values ($1, $2, $3)
@@ -71,6 +84,47 @@ app.post('/api/restaurants', async (req, res) => {
     res.status(500).json({error: 'an unexpected error has occured'});
   }
 });
+
+app.patch('/api/restaurants/:id', async (req, res) => {
+  try {
+    const {name, location, priceRange} = req.body;
+    if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
+      res.status(400).json({ error: 'name, location, or priceRange have invalid inputs' });
+      return;
+    }
+    const id = Number(req.params.id);
+    if(!Number.isInteger(id) || id < 1) {
+      res.status(400).json({error: 'id must be a positive integer'});
+      return;
+    }
+    const sql = `
+    update "restaurants"
+      set "name" = $1,
+          "location" = $2,
+          "priceRange" = $3
+      where "id" = $4
+      returning *
+    `;
+    const params = [name, location, priceRange, id];
+    const result = await db.query(sql, params);
+    if(!result.rows[0]) {
+      res.status(400).json({error: 'this id does not exist'});
+    }
+    res.json(result.rows[0]);
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({error: 'an unexpected error has occured'});
+  }
+});
+
+// app.delete('/api/restaurants/:id', (req, res) => {
+//   try {
+//     const sql
+//   } catch(err) {
+//     console.error(err);
+//     res.status(500).json({error: 'an unexpected error has occured'});
+//   }
+// });
 
 app.use(errorMiddleware);
 
