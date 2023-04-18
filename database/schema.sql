@@ -7,22 +7,21 @@ drop schema "public" cascade;
 create schema "public";
 
 CREATE TABLE "public"."restaurants" (
-	"id"          serial   NOT NULL,
-	"name"        text     NOT NULL,
-	"location"    text     NOT NULL,
-	"priceRange"  int      NOT NULL check("priceRange" >= 1 and "priceRange" <= 5),
-  PRIMARY KEY ("id")
+	"restaurantId" serial   NOT NULL,
+	"name"         text     NOT NULL,
+	"location"     text     NOT NULL,
+	"priceRange"   int      NOT NULL check("priceRange" >= 1 and "priceRange" <= 5),
+  PRIMARY KEY ("restaurantId")
 );
 
 
 
 CREATE TABLE "public"."reviews" (
 	"id"            serial   NOT NULL,
-	"restaurant.id" int   NOT NULL,
+	"restaurantId"  int      NOT NULL,
 	"name"          text     NOT NULL,
 	"review"        text     NOT NULL,
 	"rating"        int      NOT NULL check("rating" >= 1 and "rating" <=5),
   PRIMARY KEY ("id")
-  FOREIGN KEY ("restaurant.id")
-    REFERENCES "restaurants"("id")
 );
+ALTER TABLE "reviews" ADD CONSTRAINT "reviews_fk0" FOREIGN KEY ("restaurantId") REFERENCES "restaurants"("restaurantId");

@@ -36,17 +36,17 @@ app.get('/api/restaurants', async (req, res, next) => {
   }
 });
 
-app.get('/api/restaurants/:id', async (req, res, next) => {
+app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
   try {
-    const id = Number(req.params.id);
-    if (!Number.isInteger(id) || id < 1) {
-      throw new ClientError(400, 'id must be a positive integer');
+    const restaurantId = Number(req.params.restaurantId);
+    if (!Number.isInteger(restaurantId) || restaurantId < 1) {
+      throw new ClientError(400, 'restaurantId must be a positive integer');
     }
     const sql = `
     select * from restaurants
-      where "id" = $1
+      where "restaurantId" = $1
     `;
-    const params = [id];
+    const params = [restaurantId];
     const result = await db.query(sql, params);
     if(!result.rows[0]) {
       throw new ClientError(400, 'this id does not exist');
@@ -63,9 +63,6 @@ app.post('/api/restaurants', async (req, res, next) => {
     if (!name || !location || !priceRange) {
       throw new ClientError(400, 'name, location, and priceRange are required');
     }
-    if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
-      throw new ClientError(400, 'invalid input on either name, location, or priceRange');
-    }
     const sql = `
     insert into "restaurants" ("name", "location", "priceRange")
       values ($1, $2, $3)
@@ -79,14 +76,11 @@ app.post('/api/restaurants', async (req, res, next) => {
   }
 });
 
-app.put('/api/restaurants/:id', async (req, res, next) => {
+app.put('/api/restaurants/:restaurantId', async (req, res, next) => {
   try {
     const {name, location, priceRange} = req.body;
-    if (typeof name !== 'string' || typeof location !== 'string' || typeof priceRange !== 'number') {
-      throw new ClientError(400, 'name, location, or priceRange have invalid inputs' );
-    }
-    const id = Number(req.params.id);
-    if(!Number.isInteger(id) || id < 1) {
+    const restaurantId = Number(req.params.restaurantId);
+    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
     const sql = `
@@ -94,10 +88,10 @@ app.put('/api/restaurants/:id', async (req, res, next) => {
       set "name" = $1,
           "location" = $2,
           "priceRange" = $3
-      where "id" = $4
+      where "restaurantId" = $4
       returning *
     `;
-    const params = [name, location, priceRange, id];
+    const params = [name, location, priceRange, restaurantId];
     const result = await db.query(sql, params);
     if(!result.rows[0]) {
       throw new ClientError(400, 'this id does not exist');
@@ -108,18 +102,18 @@ app.put('/api/restaurants/:id', async (req, res, next) => {
   }
 });
 
-app.delete('/api/restaurants/:id', async (req, res, next) => {
+app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
   try {
-    const id = req.params.id;
-    if (!id) {
+    const restaurantId = req.params.restaurantId;
+    if (!restaurantId) {
       throw new ClientError(400, 'invalid id');
     }
     const sql = `
     delete from "restaurants"
-      where "id" = $1
+      where "restaurantId" = $1
       returning *
     `;
-    const params = [id]
+    const params = [restaurantId]
     const result = await db.query(sql, params);
     if (!result.rows[0]) {
       throw new ClientError(400, 'deleted grade not found');
