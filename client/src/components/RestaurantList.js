@@ -1,4 +1,26 @@
-function RestaurantList() {
+import React, {useEffect, useState, useContext} from 'react'
+import RestaurantsContext from '../context/RestaurantsContext';
+
+function RestaurantList(props) {
+  const [error, setError]= useState();
+  const { restaurants, setRestaurants } = useContext(RestaurantsContext)
+
+  useEffect(() => {
+    async function getRestaurants() {
+      try {
+        const response = await fetch('/api/restaurants');
+        if(!response.ok) {
+          throw new Error('Network response was not OK', response.status);
+        }
+        const jsonData = await response.json();
+        setRestaurants(jsonData);
+      } catch (error) {
+        setError(error);
+      }
+    }
+    getRestaurants();
+  }, [])
+
   return(
     <div className="list-group">
       <table className="table text-white">
@@ -13,22 +35,18 @@ function RestaurantList() {
           </tr>
         </thead>
         <tbody className="bg-dark">
-          <tr>
-            <td>Mcdonalds</td>
-            <td>New York</td>
-            <td>$$</td>
-            <td>Rating</td>
-            <td><button className="btn btn-warning">Edit</button></td>
-            <td><button className="btn btn-danger">Remove</button></td>
-          </tr>
-          <tr>
-            <td>Mcdonalds</td>
-            <td>New York</td>
-            <td>$$</td>
-            <td>Rating</td>
-            <td><button className="btn btn-warning">Edit</button></td>
-            <td><button className="btn btn-danger">Remove</button></td>
-          </tr>
+          {restaurants.map(restaurant => {
+            return (
+              <tr key={restaurant.restaurantId}>
+                <td>{restaurant.name}</td>
+                <td>{restaurant.location}</td>
+                <td>{"$".repeat(restaurant.priceRange)}</td>
+                <td>reviews</td>
+                <td><button className="btn btn-warning">Edit</button></td>
+                <td><button className="btn btn-danger">Remove</button></td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>
