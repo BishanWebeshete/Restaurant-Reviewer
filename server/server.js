@@ -3,6 +3,7 @@ import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
 import ClientError from './client-error.js';
+import cors from 'cors';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -21,6 +22,7 @@ const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 app.get('/api/restaurants', async (req, res, next) => {
