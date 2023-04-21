@@ -13,8 +13,20 @@ table {
   padding-left: 1.25rem;
 }
 
+.add-restaurant-select {
+  height: 2rem;
+  width: 105px;
+}
+
 @media screen and (min-width: 768px) {
   .add-restaurant-button {
-
+    width: 1rem;
+  }
+  .add-restaurant-select-container {
+    margin-bottom: 0.25rem;
+  }
+  .add-restaurant-select {
+    height: 2.25rem;
+    width: 140px;
   }
 }

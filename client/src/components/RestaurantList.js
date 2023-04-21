@@ -22,7 +22,7 @@ function RestaurantList(props) {
   }, [])
 
   return(
-    <div className="list-group table-responsive container">
+    <div className="list-group container">
       <table className="table text-white">
         <thead className="bg-primary">
           <tr>
