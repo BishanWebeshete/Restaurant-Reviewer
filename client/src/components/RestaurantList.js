@@ -1,5 +1,8 @@
 import React, {useEffect, useState, useContext} from 'react'
 import RestaurantsContext from '../context/RestaurantsContext';
+import { AiFillEdit } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
+
 
 function RestaurantList(props) {
   const [error, setError]= useState();
@@ -38,12 +41,12 @@ function RestaurantList(props) {
           {restaurants.map(restaurant => {
             return (
               <tr key={restaurant.restaurantId}>
-                <td>{restaurant.name}</td>
+                <td className="td">{restaurant.name}</td>
                 <td>{restaurant.location}</td>
                 <td>{"$".repeat(restaurant.priceRange)}</td>
                 <td>reviews</td>
-                <td><button className="btn btn-warning">Edit</button></td>
-                <td><button className="btn btn-danger">Remove</button></td>
+                <td><button className="btn btn-warning"><AiFillEdit/></button></td>
+                <td><button className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
             )
           })}

@@ -29,4 +29,8 @@ table {
     height: 2.25rem;
     width: 140px;
   }
+  .form-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }

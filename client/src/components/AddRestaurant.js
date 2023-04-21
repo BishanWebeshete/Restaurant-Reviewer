@@ -1,6 +1,6 @@
 function AddRestaurant () {
   return (
-      <div className="mb-4 d-flex justify-content-center">
+      <div className="mb-4 d-flex justify-content-center form-container">
         <form className="row row-col-4 g-4 form-inline">
           <div className="col-3">
             <input type="text" className="form-control" placeholder="Name" />
