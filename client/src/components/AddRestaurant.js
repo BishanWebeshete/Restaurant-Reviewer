@@ -24,9 +24,7 @@ function AddRestaurant () {
       if (!response.ok) {
         throw new Error('Network response not OK', response.status)
       }
-      console.log(response)
       const jsonData = await response.json();
-      console.log(jsonData);
       addRestaurants(jsonData);
     } catch(error) {
       console.error(error);
