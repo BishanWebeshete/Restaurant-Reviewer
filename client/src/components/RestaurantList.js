@@ -22,7 +22,28 @@ function RestaurantList(props) {
       }
     }
     getRestaurants();
-  }, [])
+  }, []);
+
+  const handleDelete = async (restaurantId) => {
+    try {
+      const response = await fetch (`/api/restaurants/${restaurantId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type':'application/json'
+        }
+      });
+      if(!response.ok) {
+        throw new Error(`Bad server response, ${response.status}`);
+      }
+      const jsonData = await response.json();
+      console.log(jsonData);
+      setRestaurants(restaurants.filter((restaurant) => {
+        return (restaurant.restaurantId !== jsonData.restaurantId)
+      }))
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return(
     <div className="list-group container">
@@ -46,7 +67,7 @@ function RestaurantList(props) {
                 <td>{"$".repeat(restaurant.priceRange)}</td>
                 <td>reviews</td>
                 <td><button className="btn btn-warning"><AiFillEdit/></button></td>
-                <td><button className="btn btn-danger"><AiOutlineDelete/></button></td>
+                <td><button onClick={() => handleDelete(restaurant.restaurantId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
             )
           })}
