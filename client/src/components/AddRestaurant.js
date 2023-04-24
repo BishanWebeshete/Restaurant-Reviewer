@@ -22,7 +22,7 @@ function AddRestaurant () {
         })
       });
       if (!response.ok) {
-        throw new Error('Network response not OK', response.status)
+        throw new Error(`Bad server response, ${response.status}`)
       }
       const jsonData = await response.json();
       addRestaurants(jsonData);
