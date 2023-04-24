@@ -2,11 +2,13 @@ import React, {useEffect, useState, useContext} from 'react'
 import RestaurantsContext from '../context/RestaurantsContext';
 import { AiFillEdit } from 'react-icons/ai';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 
 function RestaurantList(props) {
   const [error, setError]= useState();
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
+  let history = useNavigate();
 
   useEffect(() => {
     async function getRestaurants() {
@@ -44,6 +46,10 @@ function RestaurantList(props) {
     }
   }
 
+  const handleUpdate = (restaurantId) => {
+    history(`/restaurants/${restaurantId}/update`);
+  }
+
   return(
     <div className="list-group container">
       <table className="table text-white">
@@ -65,7 +71,7 @@ function RestaurantList(props) {
                 <td>{restaurant.location}</td>
                 <td>{"$".repeat(restaurant.priceRange)}</td>
                 <td>reviews</td>
-                <td><button className="btn btn-warning"><AiFillEdit/></button></td>
+                <td><button onClick={() => handleUpdate(restaurant.restaurantId)} className="btn btn-warning"><AiFillEdit/></button></td>
                 <td><button onClick={() => handleDelete(restaurant.restaurantId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
             )
