@@ -13,7 +13,7 @@ function RestaurantList(props) {
       try {
         const response = await fetch('/api/restaurants');
         if(!response.ok) {
-          throw new Error('Network response was not OK', response.status);
+          throw new Error(`Bad server response, ${response.status}`);
         }
         const jsonData = await response.json();
         setRestaurants(jsonData);
@@ -36,7 +36,6 @@ function RestaurantList(props) {
         throw new Error(`Bad server response, ${response.status}`);
       }
       const jsonData = await response.json();
-      console.log(jsonData);
       setRestaurants(restaurants.filter((restaurant) => {
         return (restaurant.restaurantId !== jsonData.restaurantId)
       }))
