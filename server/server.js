@@ -49,11 +49,22 @@ app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
       where "restaurantId" = $1
     `;
     const params = [restaurantId];
-    const result = await db.query(sql, params);
-    if(!result.rows[0]) {
+    const restaurant = await db.query(sql, params);
+    if(!restaurant.rows[0]) {
       throw new ClientError(400, 'this id does not exist');
     }
-    res.json(result.rows[0]);
+    const sql2 = `
+    select * from reviews
+      where "restaurantId" = $1
+    `;
+    const params2 = [restaurantId];
+    const reviews = await db.query(sql2, params2);
+    res.status(200).json({
+      data: {
+        restaurant: restaurant.rows[0],
+        reviews: reviews.rows
+      }
+    });
   } catch(err) {
     next(err);
   }

@@ -26,7 +26,8 @@ function RestaurantList(props) {
     getRestaurants();
   }, []);
 
-  const handleDelete = async (restaurantId) => {
+  const handleDelete = async (e, restaurantId) => {
+    e.stopPropagation();
     try {
       const response = await fetch (`/api/restaurants/${restaurantId}`, {
         method: 'DELETE',
@@ -46,8 +47,13 @@ function RestaurantList(props) {
     }
   }
 
-  const handleUpdate = (restaurantId) => {
+  const handleUpdate = (e, restaurantId) => {
+    e.stopPropagation();
     history(`/restaurants/${restaurantId}/update`);
+  }
+
+  const handleRestaurantClick = (restaurantId) => {
+    history(`/restaurants/${restaurantId}`);
   }
 
   return(
@@ -66,13 +72,13 @@ function RestaurantList(props) {
         <tbody className="bg-dark">
           {restaurants.map(restaurant => {
             return (
-              <tr key={restaurant.restaurantId}>
+              <tr onClick={() => handleRestaurantClick(restaurant.restaurantId)} key={restaurant.restaurantId}>
                 <td className="td">{restaurant.name}</td>
                 <td>{restaurant.location}</td>
                 <td>{"$".repeat(restaurant.priceRange)}</td>
                 <td>reviews</td>
-                <td><button onClick={() => handleUpdate(restaurant.restaurantId)} className="btn btn-warning"><AiFillEdit/></button></td>
-                <td><button onClick={() => handleDelete(restaurant.restaurantId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
+                <td><button onClick={(e) => handleUpdate(e, restaurant.restaurantId)} className="btn btn-warning"><AiFillEdit/></button></td>
+                <td><button onClick={(e) => handleDelete(e, restaurant.restaurantId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
             )
           })}
