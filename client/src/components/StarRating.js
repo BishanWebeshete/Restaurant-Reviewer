@@ -9,12 +9,12 @@ function StarRating ({rating}) {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
-      stars.push(<AiFillStar style={style}/>)
+      stars.push(<AiFillStar key={i} style={style}/>)
     } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
-      stars.push(<BsStarHalf style={style}/>)
+      stars.push(<BsStarHalf key={i} style={style}/>)
     }
     else {
-      stars.push(<AiOutlineStar style={style}/>)
+      stars.push(<AiOutlineStar key={i} style={style}/>)
     }
   }
   return (

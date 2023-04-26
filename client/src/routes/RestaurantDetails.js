@@ -16,7 +16,7 @@ function RestaurantDetails () {
           throw new Error (`Bad server response, ${response.status}`)
         }
         const jsonData = await response.json();
-        setSelectedRestaurant(jsonData);
+        setSelectedRestaurant(jsonData.data);
       } catch(err) {
         console.error(err);
       }
@@ -24,11 +24,16 @@ function RestaurantDetails () {
     getData();
   }, []);
 
+  if (selectedRestaurant === undefined) {
+    return (
+      <div>Is Loading</div>
+    )
+  }
   return (
-    <div>{selectedRestaurant.name && (
+    <div>{selectedRestaurant.restaurant.name && (
       <>
         <div className="mt-3 container">
-          <Reviews/>
+          <Reviews reviews={selectedRestaurant.reviews}/>
         </div>
         <div className="container">
           <AddReview />

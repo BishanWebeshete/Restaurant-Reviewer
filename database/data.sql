@@ -12,5 +12,13 @@
 insert into "restaurants"
           ("name", "location", "priceRange")
           values
-            ('Bill', 'San Francisco', 2)
+            ('Cava', 'San Francisco', 2)
           returning *;
+
+insert into "reviews"
+          ("restaurantId", "name", "review", "rating")
+          VALUES
+            (1, 'Deborah', 'terrible restaurant', 1),
+            (1, 'Joann', 'Not too shabby', 3),
+            (1, 'Lmberto', 'Thankful for this opportunity', 4)
+            returning *;
