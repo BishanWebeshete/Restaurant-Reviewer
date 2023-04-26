@@ -32,6 +32,7 @@ function RestaurantDetails () {
   return (
     <div>{selectedRestaurant.restaurant.name && (
       <>
+        <h1 className="text-center display-1">{selectedRestaurant.restaurant.name}</h1>
         <div className="mt-3 container">
           <Reviews reviews={selectedRestaurant.reviews}/>
         </div>
