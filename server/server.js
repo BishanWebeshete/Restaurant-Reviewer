@@ -137,6 +137,34 @@ app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
   }
 });
 
+app.post("/api/restaurants/:restaurantId/addReview", async (req, res, next) => {
+  const restaurantId = Number(req.params.restaurantId);
+  try {
+    const {name, review, rating} = req.body;
+    if (!name || !review || !rating) {
+      throw new ClientError(400, 'name, review, and rating are required');
+    }
+    const sql = `
+    insert into "reviews" ("restaurantId", "name", "review", "rating")
+      values ($1, $2, $3, $4)
+      returning *
+    `;
+    const params = [restaurantId, name, review, rating];
+    const newReview = await db.query(sql, params);
+    if(!newReview.rows[0]) {
+      throw new ClientError(400, 'error when submitting review');
+    }
+    res.status(201).json({
+      status: 'success',
+      data: {
+        review: newReview.rows[0]
+      }
+    })
+  } catch(err) {
+    next(err);
+  }
+})
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

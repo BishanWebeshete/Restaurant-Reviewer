@@ -1,9 +1,39 @@
 import React, { useState } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 function AddReview() {
   const [name, setName] = useState("");
   const [rating, setRating] = useState("Rating");
   const [reviewText, setReviewText] = useState("");
+  const { id } = useParams();
+  const location = useLocation();
+  const history = useNavigate();
+  console.log('location', location.pathname);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/restaurants/${id}/addReview`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          review: reviewText,
+          rating: rating
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`Bad server response, ${response.status}`)
+      }
+      const jsonData = await response.json();
+      history(0);
+      console.log(jsonData);
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="mb-2">
@@ -31,7 +61,7 @@ function AddReview() {
           <label htmlFor="Review">Review</label>
           <textarea onChange={(e)=> setReviewText(e.target.value)} value={reviewText} id="Review" className="form-control"></textarea>
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
       </form>
     </div>
   )
