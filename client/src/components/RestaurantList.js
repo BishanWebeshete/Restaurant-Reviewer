@@ -61,7 +61,7 @@ function RestaurantList(props) {
     return (
       <>
         <StarRating rating={restaurant.average_rating} />
-        <span className="text-warning ml-1">{restaurant.count ?? 0}</span>
+        <span className="text-warning ml-1">({restaurant.count ?? 0})</span>
       </>
     )
   }

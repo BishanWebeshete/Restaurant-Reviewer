@@ -6,8 +6,8 @@ export default function Reviews ({reviews}) {
     <div className="row row-cols-3 mb-2">
       {reviews?.map((review) => {
         return (
-          <div key={review.id} className="card text-white bg-primary mb-3 mr-3" style={{ maxWidth: "30%" }}>
-            <div className="card-header d-flex justify-content-between">
+          <div key={review.id} className="container card text-white bg-primary mb-3 ms-3" style={{ maxWidth: "30%" }}>
+            <div className=" card-header d-flex justify-content-between">
               <span>{review.name}</span>
               <span><StarRating rating={review.rating} /></span>
             </div>
@@ -19,42 +19,4 @@ export default function Reviews ({reviews}) {
       })}
     </div>
   )
-    }
-// export default Reviews
-      // {/* <div className="card text-white bg-primary mb-3 mr-3" style={{ maxWidth: "30%" }}>
-      //   <div className="card-header d-flex justify-content-between">
-      //     <span>Deborah</span>
-      //     <span><StarRating rating={3}/></span>
-      //   </div>
-      //   <div className="card-body">
-      //     <p className="card-text">This was the most amazing food i've ever had in my life</p>
-      //   </div>
-      // </div>
-      // <div className="card text-white bg-primary mb-3 mr-3" style={{ maxWidth: "30%" }}>
-      //   <div className="card-header d-flex justify-content-between">
-      //     <span>Deborah</span>
-      //     <span><StarRating rating={3} /></span>
-      //   </div>
-      //   <div className="card-body">
-      //     <p className="card-text">This was the most amazing food i've ever had in my life</p>
-      //   </div>
-      // </div>
-      // <div className="card text-white bg-primary mb-3 mr-3" style={{ maxWidth: "30%" }}>
-      //   <div className="card-header d-flex justify-content-between">
-      //     <span>Deborah</span>
-      //     <span><StarRating rating={3} /></span>
-      //   </div>
-      //   <div className="card-body">
-      //     <p className="card-text">This was the most amazing food i've ever had in my life</p>
-      //   </div>
-      // </div>
-      // <div className="card text-white bg-primary mb-3 mr-3" style={{ maxWidth: "30%" }}>
-      //   <div className="card-header d-flex justify-content-between">
-      //     <span>Deborah</span>
-      //     <span><StarRating rating={3} /></span>
-      //   </div>
-      //   <div className="card-body">
-      //     <p className="card-text">This was the most amazing food i've ever had in my life</p>
-      //   </div>
-      // </div> */
-// }
+}
