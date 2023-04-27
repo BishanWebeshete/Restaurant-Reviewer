@@ -32,7 +32,18 @@ app.get('/api/restaurants', async (req, res, next) => {
       from "restaurants"
     `;
     const result = await db.query(sql);
-    res.json(result.rows);
+    const sql2 = `
+    select * from "restaurants" left join (select "restaurantId" as "temp", COUNT(*), TRUNC(AVG("rating"),1) as "average_rating"
+      from "reviews" group by "temp") reviews on "restaurants"."restaurantId" = "reviews"."temp"
+    `;
+    const restaurantRatingsData = await db.query(sql2);
+    res.status(200).json({
+      status: "success",
+      data: {
+        restaurants: result.rows,
+        restaurantRatings: restaurantRatingsData.rows
+      }
+    });
   } catch (err) {
     next(err);
   }
@@ -45,7 +56,7 @@ app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
       throw new ClientError(400, 'restaurantId must be a positive integer');
     }
     const sql = `
-    select * from restaurants
+    select * from "restaurants"
       where "restaurantId" = $1
     `;
     const params = [restaurantId];

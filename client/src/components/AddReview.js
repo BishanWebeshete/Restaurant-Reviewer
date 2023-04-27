@@ -28,7 +28,6 @@ function AddReview() {
       }
       const jsonData = await response.json();
       history(0);
-      console.log(jsonData);
     } catch(error) {
       console.error(error);
     }
