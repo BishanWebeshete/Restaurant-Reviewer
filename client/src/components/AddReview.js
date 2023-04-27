@@ -8,7 +8,6 @@ function AddReview() {
   const { id } = useParams();
   const location = useLocation();
   const history = useNavigate();
-  console.log('location', location.pathname);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
