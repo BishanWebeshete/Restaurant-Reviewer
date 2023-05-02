@@ -16,9 +16,9 @@ function AddRestaurant () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: name,
-          location: location,
-          priceRange: priceRange
+          name,
+          location,
+          priceRange
         })
       });
       if (!response.ok) {

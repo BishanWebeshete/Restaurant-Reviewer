@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function AddReview() {
   const [name, setName] = useState("");
   const [rating, setRating] = useState("Rating");
   const [reviewText, setReviewText] = useState("");
   const { id } = useParams();
-  const location = useLocation();
   const history = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,9 +17,9 @@ function AddReview() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: name,
+          name,
           review: reviewText,
-          rating: rating
+          rating
         })
       });
       if (!response.ok) {

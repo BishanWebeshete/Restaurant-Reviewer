@@ -1,13 +1,11 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import RestaurantsContext from '../context/RestaurantsContext';
-import { AiFillEdit } from 'react-icons/ai';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './StarRating';
 
 
 function RestaurantList(props) {
-  const [error, setError]= useState();
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
   let history = useNavigate();
 
@@ -21,7 +19,7 @@ function RestaurantList(props) {
         const jsonData = await response.json();
         setRestaurants(jsonData.data.restaurantRatings);
       } catch (error) {
-        setError(error);
+        console.error(error);
       }
     }
     getRestaurants();

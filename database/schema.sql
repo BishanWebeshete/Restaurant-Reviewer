@@ -24,4 +24,4 @@ CREATE TABLE "public"."reviews" (
 	"rating"        int      NOT NULL check("rating" >= 1 and "rating" <=5),
   PRIMARY KEY ("id")
 );
-ALTER TABLE "reviews" ADD CONSTRAINT "reviews_fk0" FOREIGN KEY ("restaurantId") REFERENCES "restaurants"("restaurantId");
+ALTER TABLE "reviews" ADD CONSTRAINT "reviews_fk0" FOREIGN KEY ("restaurantId") REFERENCES "restaurants"("restaurantId") ON DELETE CASCADE;
