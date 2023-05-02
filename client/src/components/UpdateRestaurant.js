@@ -17,9 +17,9 @@ function UpdateRestaurant (props) {
           throw new Error(`Bad server response, ${response.status}`);
         }
         const jsonData = await response.json();
-        setName(jsonData.name);
-        setLocation(jsonData.location);
-        setPriceRange(jsonData.priceRange);
+        setName(jsonData.data.restaurant.name);
+        setLocation(jsonData.data.restaurant.location);
+        setPriceRange(jsonData.data.restaurant.priceRange);
       } catch(err) {
         console.error(err);
       }
@@ -36,9 +36,9 @@ function UpdateRestaurant (props) {
           'Content-Type':'application/json'
         },
         body: JSON.stringify({
-          name: name,
-          location: location,
-          priceRange: priceRange
+          name,
+          location,
+          priceRange
         })
       });
       if (!response.ok) {

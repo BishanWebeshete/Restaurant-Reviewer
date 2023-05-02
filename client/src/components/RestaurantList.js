@@ -1,12 +1,11 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import RestaurantsContext from '../context/RestaurantsContext';
-import { AiFillEdit } from 'react-icons/ai';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import StarRating from './StarRating';
 
 
 function RestaurantList(props) {
-  const [error, setError]= useState();
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
   let history = useNavigate();
 
@@ -18,9 +17,9 @@ function RestaurantList(props) {
           throw new Error(`Bad server response, ${response.status}`);
         }
         const jsonData = await response.json();
-        setRestaurants(jsonData);
+        setRestaurants(jsonData.data.restaurantRatings);
       } catch (error) {
-        setError(error);
+        console.error(error);
       }
     }
     getRestaurants();
@@ -56,6 +55,14 @@ function RestaurantList(props) {
     history(`/restaurants/${restaurantId}`);
   }
 
+  const renderRating = (restaurant) => {
+    return (
+      <>
+        <StarRating rating={restaurant.average_rating} />
+        <span className="text-warning ml-1">({restaurant.count ?? 0})</span>
+      </>
+    )
+  }
   return(
     <div className="list-group container">
       <table className="table text-white">
@@ -76,7 +83,7 @@ function RestaurantList(props) {
                 <td className="td">{restaurant.name}</td>
                 <td>{restaurant.location}</td>
                 <td>{"$".repeat(restaurant.priceRange)}</td>
-                <td>reviews</td>
+                <td>{renderRating(restaurant)}</td>
                 <td><button onClick={(e) => handleUpdate(e, restaurant.restaurantId)} className="btn btn-warning"><AiFillEdit/></button></td>
                 <td><button onClick={(e) => handleDelete(e, restaurant.restaurantId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
