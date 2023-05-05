@@ -7,7 +7,7 @@ import StarRating from './StarRating';
 
 function RestaurantList(props) {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
-  let history = useNavigate();
+  const history = useNavigate();
 
   useEffect(() => {
     async function getRestaurants() {
