@@ -22,7 +22,6 @@ const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
-app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 app.get('/api/restaurants', async (req, res, next) => {
@@ -40,7 +39,6 @@ app.get('/api/restaurants', async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: {
-        restaurants: result.rows,
         restaurantRatings: restaurantRatingsData.rows
       }
     });
@@ -62,7 +60,7 @@ app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
     const params = [restaurantId];
     const restaurant = await db.query(sql, params);
     if(!restaurant.rows[0]) {
-      throw new ClientError(400, 'this id does not exist');
+      throw new ClientError(400, `the restaurant id of: ${restaurantId} does not exist`);
     }
     const sql2 = `
     select * from reviews
