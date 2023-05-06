@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function UpdateRestaurant (props) {
+function UpdateRestaurant () {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");

@@ -22,7 +22,6 @@ const uploadsStaticDir = new URL('public', import.meta.url).pathname;
 app.use(express.static(reactStaticDir));
 // Static directory for file uploads server/public/
 app.use(express.static(uploadsStaticDir));
-app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 app.get('/api/restaurants', async (req, res, next) => {
@@ -40,7 +39,6 @@ app.get('/api/restaurants', async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: {
-        restaurants: result.rows,
         restaurantRatings: restaurantRatingsData.rows
       }
     });
@@ -62,7 +60,7 @@ app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
     const params = [restaurantId];
     const restaurant = await db.query(sql, params);
     if(!restaurant.rows[0]) {
-      throw new ClientError(400, 'this id does not exist');
+      throw new ClientError(400, `the restaurant id of: ${restaurantId} does not exist`);
     }
     const sql2 = `
     select * from reviews
@@ -128,7 +126,10 @@ app.put('/api/restaurants/:restaurantId', async (req, res, next) => {
 
 app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
   try {
-    const restaurantId = req.params.restaurantId;
+    const restaurantId = Number(req.params.restaurantId);
+    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+      throw new ClientError(400, 'id must be a positive integer');
+    }
     if (!restaurantId) {
       throw new ClientError(400, 'invalid id');
     }
@@ -149,8 +150,14 @@ app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
 });
 
 app.post("/api/restaurants/:restaurantId/addReview", async (req, res, next) => {
-  const restaurantId = Number(req.params.restaurantId);
   try {
+    const restaurantId = Number(req.params.restaurantId);
+    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+      throw new ClientError(400, 'id must be a positive integer');
+    }
+    if(!restaurantId) {
+      throw new ClientError(400, 'invalid id');
+    }
     const {name, review, rating} = req.body;
     if (!name || !review || !rating) {
       throw new ClientError(400, 'name, review, and rating are required');
