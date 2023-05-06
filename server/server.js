@@ -126,7 +126,10 @@ app.put('/api/restaurants/:restaurantId', async (req, res, next) => {
 
 app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
   try {
-    const restaurantId = req.params.restaurantId;
+    const restaurantId = Number(req.params.restaurantId);
+    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+      throw new ClientError(400, 'id must be a positive integer');
+    }
     if (!restaurantId) {
       throw new ClientError(400, 'invalid id');
     }
@@ -147,8 +150,14 @@ app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
 });
 
 app.post("/api/restaurants/:restaurantId/addReview", async (req, res, next) => {
-  const restaurantId = Number(req.params.restaurantId);
   try {
+    const restaurantId = Number(req.params.restaurantId);
+    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+      throw new ClientError(400, 'id must be a positive integer');
+    }
+    if(!restaurantId) {
+      throw new ClientError(400, 'invalid id');
+    }
     const {name, review, rating} = req.body;
     if (!name || !review || !rating) {
       throw new ClientError(400, 'name, review, and rating are required');
