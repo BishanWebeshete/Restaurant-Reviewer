@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 function AddReview() {
   const [name, setName] = useState("");
-  const [rating, setRating] = useState("Rating");
+  const [rating, setRating] = useState("");
   const [reviewText, setReviewText] = useState("");
   const { id } = useParams();
   const history = useNavigate();
@@ -46,7 +46,7 @@ function AddReview() {
               <label htmlFor="rating" className="fw-bolder">Rating</label>
               <div>
                 <select onChange={(e) => setRating(e.target.value)} value={rating} id="rating" className="form-select">
-                  <option disabled>Rating</option>
+                  <option disabled value="">Rating</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
