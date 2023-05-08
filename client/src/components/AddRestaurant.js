@@ -5,7 +5,7 @@ function AddRestaurant () {
   const { addRestaurants } = useContext(RestaurantsContext)
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [priceRange, setPriceRange] = useState("Price Range");
+  const [priceRange, setPriceRange] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +52,7 @@ function AddRestaurant () {
           </div>
           <div className="col-3 add-restaurant-select-container">
             <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="custom-select my-1 mr-sm-2 add-restaurant-select">
-              <option disabled>Price Range</option>
+              <option disabled value="">Price Range</option>
               <option value="1">$</option>
               <option value="2">$$</option>
               <option value="3">$$$</option>
