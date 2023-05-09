@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import RestaurantsContext from '../context/RestaurantsContext';
 import Reviews from '../components/Reviews';
 import AddReview from '../components/AddReview';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 
 function RestaurantDetails () {
@@ -26,15 +27,7 @@ function RestaurantDetails () {
 
   if (selectedRestaurant === undefined) {
     return (
-      <>
-        <div className="loading-container d-flex justify-content-center align-items-center">
-            <div className="text-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-        </div>
-      </>
+     <LoadingSpinner />
     )
   }
 

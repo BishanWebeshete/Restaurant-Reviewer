@@ -1,14 +1,16 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import RestaurantsContext from '../context/RestaurantsContext';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './StarRating';
 import ErrorMessage from './ErrorMessage';
+import LoadingSpinner from './LoadingSpinner';
 
 
 function RestaurantList(props) {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext)
   const history = useNavigate();
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getRestaurants() {
@@ -19,6 +21,7 @@ function RestaurantList(props) {
         }
         const jsonData = await response.json();
         setRestaurants(jsonData.data.restaurantRatings);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -65,9 +68,15 @@ function RestaurantList(props) {
     )
   }
 
-  if (restaurants.length === 0) {
+  if (restaurants === undefined) {
     return (
       <ErrorMessage text={"restaurants"} />
+    )
+  }
+
+  if(isLoading === true) {
+    return (
+      <LoadingSpinner />
     )
   }
 
