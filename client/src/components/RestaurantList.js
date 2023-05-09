@@ -63,6 +63,15 @@ function RestaurantList(props) {
       </>
     )
   }
+
+  if (restaurants.length === 0) {
+    return (
+      <div className="error-container bg-danger">
+        <h3 className="error text-white">There are no restaurants at the moment... please check back soon or add one yourself!</h3>
+      </div>
+    )
+  }
+
   return(
     <div className="list-group container">
       <table className="table text-white">
