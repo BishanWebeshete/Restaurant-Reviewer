@@ -26,9 +26,18 @@ function RestaurantDetails () {
 
   if (selectedRestaurant === undefined) {
     return (
-      <div>Is Loading</div>
+      <>
+        <div className="loading-container d-flex justify-content-center align-items-center">
+            <div className="text-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+        </div>
+      </>
     )
   }
+
   return (
     <div>{selectedRestaurant.restaurant.name && (
       <>
