@@ -3,6 +3,7 @@ import RestaurantsContext from '../context/RestaurantsContext';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import StarRating from './StarRating';
+import ErrorMessage from './ErrorMessage';
 
 
 function RestaurantList(props) {
@@ -66,9 +67,7 @@ function RestaurantList(props) {
 
   if (restaurants.length === 0) {
     return (
-      <div className="error-container bg-danger">
-        <h3 className="error text-white">There are no restaurants at the moment... please check back soon or add one yourself!</h3>
-      </div>
+      <ErrorMessage text={"restaurants"} />
     )
   }
 

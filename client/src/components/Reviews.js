@@ -1,12 +1,11 @@
 import React from 'react';
 import StarRating from './StarRating';
+import ErrorMessage from './ErrorMessage';
 
 export default function Reviews ({reviews}) {
   if(reviews.length === 0) {
     return (
-      <div className="error-container bg-danger">
-        <h3 className="error text-white">There are no reviews at the moment... please check back soon or add one yourself!</h3>
-      </div>
+      <ErrorMessage text={"reviews"} />
     );
   }
 
