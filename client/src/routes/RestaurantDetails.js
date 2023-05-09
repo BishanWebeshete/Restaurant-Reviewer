@@ -37,6 +37,7 @@ function RestaurantDetails () {
       </>
     )
   }
+
   return (
     <div>{selectedRestaurant.restaurant.name && (
       <>
