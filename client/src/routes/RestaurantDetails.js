@@ -4,6 +4,7 @@ import RestaurantsContext from '../context/RestaurantsContext';
 import Reviews from '../components/Reviews';
 import AddReview from '../components/AddReview';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Navbar from '../components/Navbar';
 
 
 function RestaurantDetails () {
@@ -34,6 +35,7 @@ function RestaurantDetails () {
   return (
     <div>{selectedRestaurant.restaurant.name && (
       <>
+        <Navbar />
         <div className="d-flex justify-content-center">
           <h1 className="text-center display-1 d-inline-block bg-danger title">{selectedRestaurant.restaurant.name}</h1>
         </div>

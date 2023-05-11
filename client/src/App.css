@@ -53,6 +53,10 @@ body {
   padding-right: 1rem;
 }
 
+.navbar-text {
+  padding-left: 1.5rem;
+}
+
 @media screen and (min-width: 768px) {
   .add-restaurant-button {
     width: 1rem;
@@ -67,5 +71,8 @@ body {
   .form-container {
     display: flex;
     justify-content: space-evenly;
+  }
+  .navbar-text {
+    padding-left: 4rem;
   }
 }
