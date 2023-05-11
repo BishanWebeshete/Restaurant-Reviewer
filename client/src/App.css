@@ -33,9 +33,28 @@ body {
 
 .error-container {
   border: 0.25rem solid black;
-  border-radius: 0.55rem;
+  border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
+}
+
+.label-container {
+  border: 0.25rem solid black;
+  border-radius: 0.25rem;
+  padding: 0.15rem;
+  margin: 0.15rem;
+}
+
+.title {
+  margin-top: 1rem;
+  border: 0.25rem solid black;
+  border-radius: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar-text {
+  padding-left: 1.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -52,5 +71,8 @@ body {
   .form-container {
     display: flex;
     justify-content: space-evenly;
+  }
+  .navbar-text {
+    padding-left: 4rem;
   }
 }

@@ -27,6 +27,7 @@ function RestaurantList(props) {
       }
     }
     getRestaurants();
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- Run once on mount
   }, []);
 
   const handleDelete = async (e, restaurantId) => {

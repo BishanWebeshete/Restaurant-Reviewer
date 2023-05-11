@@ -4,6 +4,7 @@ import RestaurantsContext from '../context/RestaurantsContext';
 import Reviews from '../components/Reviews';
 import AddReview from '../components/AddReview';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Navbar from '../components/Navbar';
 
 
 function RestaurantDetails () {
@@ -23,6 +24,7 @@ function RestaurantDetails () {
       }
     }
     getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- Run once on mount
   }, []);
 
   if (selectedRestaurant === undefined) {
@@ -34,7 +36,10 @@ function RestaurantDetails () {
   return (
     <div>{selectedRestaurant.restaurant.name && (
       <>
-        <h1 className="text-center display-1">{selectedRestaurant.restaurant.name}</h1>
+        <Navbar />
+        <div className="d-flex justify-content-center">
+          <h1 className="text-center display-1 d-inline-block bg-danger title">{selectedRestaurant.restaurant.name}</h1>
+        </div>
         <div className="d-flex align-items-center justify-content-center container">
           <Reviews reviews={selectedRestaurant.reviews}/>
         </div>

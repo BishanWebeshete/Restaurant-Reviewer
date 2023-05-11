@@ -25,6 +25,7 @@ function UpdateRestaurant () {
       }
     }
     getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- Run once on mount
   }, [])
 
   const handleSubmit = async (e) => {
@@ -44,8 +45,7 @@ function UpdateRestaurant () {
       if (!response.ok) {
         throw new Error(`Bad server response, ${response.status}`)
       }
-      const jsonData = await response.json();
-      console.log(jsonData);
+      await response.json();
       history('/');
     } catch(err) {
       console.error(err);
@@ -55,11 +55,11 @@ function UpdateRestaurant () {
   return (
     <form className="container" action="">
       <div className="form-group mt-3">
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name" className="label-container bg-warning">Name</label>
         <input value={name} onChange={(e)=> setName(e.target.value)} id="name" className="form-control"></input>
       </div>
       <div className="form-group mt-3">
-        <label htmlFor="location">Location</label>
+        <label htmlFor="location" className="label-container bg-warning">Location</label>
         <input value={location} onChange={(e)=> setLocation(e.target.value)} id="location" className="form-control"></input>
       </div>
       <div className="form-group mt-4">
