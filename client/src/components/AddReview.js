@@ -25,7 +25,7 @@ function AddReview() {
       if (!response.ok) {
         throw new Error(`Bad server response, ${response.status}`)
       }
-      const jsonData = await response.json();
+      await response.json();
       history(0);
     } catch(error) {
       console.error(error);
