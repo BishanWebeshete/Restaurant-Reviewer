@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react'
+import React, {useEffect, useContext, useState} from 'react';
 import RestaurantsContext from '../context/RestaurantsContext';
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
