@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import RestaurantsContext from '../context/RestaurantsContext'
+import RestaurantsContext from '../context/RestaurantsContext';
 
 function AddRestaurant () {
   const { addRestaurants } = useContext(RestaurantsContext)
