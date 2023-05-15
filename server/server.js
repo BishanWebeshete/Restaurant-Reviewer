@@ -24,22 +24,22 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/restaurants', async (req, res, next) => {
+app.get('/api/stores', async (req, res, next) => {
   try {
     const sql = `
     select *
-      from "restaurants"
+      from "stores"
     `;
     const result = await db.query(sql);
     const sql2 = `
-    select * from "restaurants" left join (select "restaurantId" as "temp", COUNT(*), TRUNC(AVG("rating"),1) as "average_rating"
-      from "reviews" group by "temp") reviews on "restaurants"."restaurantId" = "reviews"."temp"
+    select * from "stores" left join (select "storeId" as "temp", COUNT(*), TRUNC(AVG("rating"),1) as "average_rating"
+      from "reviews" group by "temp") reviews on "stores"."storeId" = "reviews"."temp"
     `;
-    const restaurantRatingsData = await db.query(sql2);
+    const storeRatingsData = await db.query(sql2);
     res.status(200).json({
       status: "success",
       data: {
-        restaurantRatings: restaurantRatingsData.rows
+        storeRatings: storeRatingsData.rows
       }
     });
   } catch (err) {
@@ -47,30 +47,30 @@ app.get('/api/restaurants', async (req, res, next) => {
   }
 });
 
-app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
+app.get('/api/stores/:storeId', async (req, res, next) => {
   try {
-    const restaurantId = Number(req.params.restaurantId);
-    if (!Number.isInteger(restaurantId) || restaurantId < 1) {
-      throw new ClientError(400, 'restaurantId must be a positive integer');
+    const storeId = Number(req.params.storeId);
+    if (!Number.isInteger(storeId) || storeId < 1) {
+      throw new ClientError(400, 'storeId must be a positive integer');
     }
     const sql = `
-    select * from "restaurants"
-      where "restaurantId" = $1
+    select * from "stores"
+      where "storeId" = $1
     `;
-    const params = [restaurantId];
-    const restaurant = await db.query(sql, params);
-    if(!restaurant.rows[0]) {
-      throw new ClientError(400, `the restaurant id of: ${restaurantId} does not exist`);
+    const params = [storeId];
+    const store = await db.query(sql, params);
+    if(!store.rows[0]) {
+      throw new ClientError(400, `the store id of: ${storeId} does not exist`);
     }
     const sql2 = `
     select * from reviews
-      where "restaurantId" = $1
+      where "storeId" = $1
     `;
-    const params2 = [restaurantId];
+    const params2 = [storeId];
     const reviews = await db.query(sql2, params2);
     res.status(200).json({
       data: {
-        restaurant: restaurant.rows[0],
+        store: store.rows[0],
         reviews: reviews.rows
       }
     });
@@ -79,14 +79,14 @@ app.get('/api/restaurants/:restaurantId', async (req, res, next) => {
   }
 });
 
-app.post('/api/restaurants', async (req, res, next) => {
+app.post('/api/stores', async (req, res, next) => {
   try {
     const { name, location, priceRange } = req.body;
     if (!name || !location || !priceRange) {
       throw new ClientError(400, 'name, location, and priceRange are required');
     }
     const sql = `
-    insert into "restaurants" ("name", "location", "priceRange")
+    insert into "stores" ("name", "location", "priceRange")
       values ($1, $2, $3)
       returning *
     `;
@@ -98,22 +98,22 @@ app.post('/api/restaurants', async (req, res, next) => {
   }
 });
 
-app.put('/api/restaurants/:restaurantId', async (req, res, next) => {
+app.put('/api/stores/:storeId', async (req, res, next) => {
   try {
     const {name, location, priceRange} = req.body;
-    const restaurantId = Number(req.params.restaurantId);
-    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+    const storeId = Number(req.params.storeId);
+    if(!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
     const sql = `
-    update "restaurants"
+    update "stores"
       set "name" = $1,
           "location" = $2,
           "priceRange" = $3
-      where "restaurantId" = $4
+      where "storeId" = $4
       returning *
     `;
-    const params = [name, location, priceRange, restaurantId];
+    const params = [name, location, priceRange, storeId];
     const result = await db.query(sql, params);
     if(!result.rows[0]) {
       throw new ClientError(400, 'this id does not exist');
@@ -124,24 +124,24 @@ app.put('/api/restaurants/:restaurantId', async (req, res, next) => {
   }
 });
 
-app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
+app.delete('/api/stores/:storeId', async (req, res, next) => {
   try {
-    const restaurantId = Number(req.params.restaurantId);
-    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+    const storeId = Number(req.params.storeId);
+    if(!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
-    if (!restaurantId) {
+    if (!storeId) {
       throw new ClientError(400, 'invalid id');
     }
     const sql = `
-    delete from "restaurants"
-      where "restaurantId" = $1
+    delete from "stores"
+      where "storeId" = $1
       returning *
     `;
-    const params = [restaurantId]
+    const params = [storeId]
     const result = await db.query(sql, params);
     if (!result.rows[0]) {
-      throw new ClientError(400, 'deleted grade not found');
+      throw new ClientError(400, 'deleted store not found');
     }
     res.json(result.rows[0]);
   } catch(err) {
@@ -149,13 +149,13 @@ app.delete('/api/restaurants/:restaurantId', async (req, res, next) => {
   }
 });
 
-app.post("/api/restaurants/:restaurantId/addReview", async (req, res, next) => {
+app.post("/api/stores/:storeId/addReview", async (req, res, next) => {
   try {
-    const restaurantId = Number(req.params.restaurantId);
-    if(!Number.isInteger(restaurantId) || restaurantId < 1) {
+    const storeId = Number(req.params.storeId);
+    if(!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
-    if(!restaurantId) {
+    if(!storeId) {
       throw new ClientError(400, 'invalid id');
     }
     const {name, review, rating} = req.body;
@@ -163,11 +163,11 @@ app.post("/api/restaurants/:restaurantId/addReview", async (req, res, next) => {
       throw new ClientError(400, 'name, review, and rating are required');
     }
     const sql = `
-    insert into "reviews" ("restaurantId", "name", "review", "rating")
+    insert into "reviews" ("storeId", "name", "review", "rating")
       values ($1, $2, $3, $4)
       returning *
     `;
-    const params = [restaurantId, name, review, rating];
+    const params = [storeId, name, review, rating];
     const newReview = await db.query(sql, params);
     if(!newReview.rows[0]) {
       throw new ClientError(400, 'error when submitting review');

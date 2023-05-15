@@ -11,7 +11,7 @@ function AddReview() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/restaurants/${id}/addReview`, {
+      const response = await fetch(`/api/stores/${id}/addReview`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

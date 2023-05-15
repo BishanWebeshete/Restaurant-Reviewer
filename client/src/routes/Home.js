@@ -1,13 +1,13 @@
 import Header from '../components/Header';
-import AddRestaurant from '../components/AddRestaurant';
-import RestaurantList from '../components/RestaurantList';
+import AddStore from '../components/AddStore';
+import StoreList from '../components/StoreList';
 
 function Home() {
   return (
     <div>
       <Header />
-      <AddRestaurant />
-      <RestaurantList />
+      <AddStore />
+      <StoreList />
     </div>
   )
 }
