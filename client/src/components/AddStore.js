@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import RestaurantsContext from '../context/RestaurantsContext';
+import StoresContext from '../context/StoresContext';
 
-function AddRestaurant () {
-  const { addRestaurants } = useContext(RestaurantsContext)
+function AddStore () {
+  const { addStores } = useContext(StoresContext)
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
@@ -10,7 +10,7 @@ function AddRestaurant () {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/restaurants', {
+      const response = await fetch('/api/stores', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ function AddRestaurant () {
         throw new Error(`Bad server response, ${response.status}`)
       }
       const jsonData = await response.json();
-      addRestaurants(jsonData);
+      addStores(jsonData);
     } catch(error) {
       console.error(error);
     }
@@ -67,4 +67,4 @@ function AddRestaurant () {
       </div>
   )
 }
-export default AddRestaurant;
+export default AddStore;

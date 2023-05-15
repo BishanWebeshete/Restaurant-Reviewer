@@ -9,16 +9,16 @@
 --      ('Learn to code', false),
 --      ('Build projects', false),
 --      ('Get a job', false);
-insert into "restaurants"
+insert into "stores"
           ("name", "location", "priceRange")
           values
-            ('Cava', 'San Francisco', 2)
+            ('Macys', 'Irvine', 3)
           returning *;
 
 insert into "reviews"
-          ("restaurantId", "name", "review", "rating")
+          ("storeId", "name", "review", "rating")
           VALUES
-            (1, 'Deborah', 'terrible restaurant', 1),
+            (1, 'Deborah', 'terrible store', 1),
             (1, 'Joann', 'Not too shabby', 3),
-            (1, 'Lmberto', 'Thankful for this opportunity', 4)
+            (1, 'Lmberto', 'Thankful to come to such a nice store', 4)
             returning *;

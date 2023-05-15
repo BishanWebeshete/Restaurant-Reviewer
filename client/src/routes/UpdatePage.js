@@ -1,4 +1,4 @@
-import UpdateRestaurant from '../components/UpdateRestaurant';
+import UpdateStore from '../components/UpdateStore';
 import Navbar from '../components/Navbar';
 
 function UpdatePage () {
@@ -6,8 +6,8 @@ function UpdatePage () {
     <>
       <Navbar />
       <div>
-        <h1 className="text-center mt-3">Update Restaurant</h1>
-        <UpdateRestaurant />
+        <h1 className="text-center mt-3">Update Store</h1>
+        <UpdateStore />
       </div>
     </>
   )

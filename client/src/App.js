@@ -2,19 +2,19 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
-import RestaurantDetails from './routes/RestaurantDetails';
+import StoreDetails from './routes/StoreDetails';
 import UpdatePage from './routes/UpdatePage';
-import { RestaurantsContextProvider } from './context/RestaurantsContext';
+import { StoresContextProvider } from './context/StoresContext';
 
 function App() {
   return (
-    <RestaurantsContextProvider>
+    <StoresContextProvider>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/restaurants/:id' element={<RestaurantDetails />} />
-          <Route path='/restaurants/:id/update' element={<UpdatePage />} />
+          <Route path='/stores/:id' element={<StoreDetails />} />
+          <Route path='/stores/:id/update' element={<UpdatePage />} />
         </Routes>
-    </RestaurantsContextProvider>
+    </StoresContextProvider>
   )
 }
 

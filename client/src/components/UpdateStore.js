@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function UpdateRestaurant () {
+function UpdateStore () {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -12,14 +12,14 @@ function UpdateRestaurant () {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await fetch(`/api/restaurants/${id}`);
+        const response = await fetch(`/api/stores/${id}`);
         if (!response.ok) {
           throw new Error(`Bad server response, ${response.status}`);
         }
         const jsonData = await response.json();
-        setName(jsonData.data.restaurant.name);
-        setLocation(jsonData.data.restaurant.location);
-        setPriceRange(jsonData.data.restaurant.priceRange);
+        setName(jsonData.data.store.name);
+        setLocation(jsonData.data.store.location);
+        setPriceRange(jsonData.data.store.priceRange);
       } catch(err) {
         console.error(err);
       }
@@ -31,7 +31,7 @@ function UpdateRestaurant () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`/api/restaurants/${id}`, {
+      const response = await fetch(`/api/stores/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type':'application/json'
@@ -76,4 +76,4 @@ function UpdateRestaurant () {
     </form>
   )
 }
-export default UpdateRestaurant;
+export default UpdateStore;
