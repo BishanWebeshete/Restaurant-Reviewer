@@ -1,6 +1,10 @@
 function Header () {
   return (
-    <h1 className='main-header display-1 text-center fw-semibold'>Add Store</h1>
+    <div className='main-header text-center'>
+      <h1 className='bg-secondary display-1 text-warning main-text'>
+        Add a Store
+      </h1>
+    </div>
   )
 }
 export default Header;

@@ -3,6 +3,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  padding-top: 1rem;
 }
 
 table {
@@ -19,7 +20,7 @@ table {
 }
 
 body {
-  background-image: url("https://png.pngtree.com/background/20210710/original/pngtree-vector-icon-wind-fast-food-background-picture-image_981298.jpg");
+  background-image: url("https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdGhlcyUyMHNob3B8ZW58MHx8MHx8&w=1000&q=80");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -55,6 +56,24 @@ body {
 
 .navbar-text {
   padding-left: 1.5rem;
+}
+
+.new-store-form {
+  padding-left: 1.75rem;
+}
+
+.main-text {
+  border: 0.25rem solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+}
+
+.review-text {
+  border: 0.25rem solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
 }
 
 @media screen and (min-width: 768px) {

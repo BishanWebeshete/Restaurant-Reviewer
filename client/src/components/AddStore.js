@@ -32,7 +32,7 @@ function AddStore () {
   }
 
   return (
-      <div className="mb-4 d-flex justify-content-center form-container">
+    <div className="mb-4 d-flex justify-content-center form-container new-store-form">
         <form className="row row-col-4 g-4 form-inline">
           <div className="col-3">
             <input
