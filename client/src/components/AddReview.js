@@ -34,7 +34,9 @@ function AddReview() {
 
   return (
     <>
-      <h2 className="text-center">Write A Review</h2>
+      <div className="write-review-container d-flex justify-content-center">
+        <h2 className="text-center bg-secondary text-warning d-inline-block review-text">Write A Review</h2>
+      </div>
       <div className="mb-2">
         <form action="">
           <div className="row g-3">
