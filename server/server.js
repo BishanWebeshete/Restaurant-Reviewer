@@ -3,7 +3,6 @@ import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
 import ClientError from './client-error.js';
-import cors from 'cors';
 
 // eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
@@ -27,17 +26,12 @@ app.use(express.json());
 app.get('/api/stores', async (req, res, next) => {
   try {
     const sql = `
-    select *
-      from "stores"
-    `;
-    const result = await db.query(sql);
-    const sql2 = `
     select * from "stores" left join (select "storeId" as "temp", COUNT(*), TRUNC(AVG("rating"),1) as "average_rating"
       from "reviews" group by "temp") reviews on "stores"."storeId" = "reviews"."temp"
     `;
-    const storeRatingsData = await db.query(sql2);
+    const storeRatingsData = await db.query(sql);
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: {
         storeRatings: storeRatingsData.rows
       }
@@ -59,7 +53,7 @@ app.get('/api/stores/:storeId', async (req, res, next) => {
     `;
     const params = [storeId];
     const store = await db.query(sql, params);
-    if(!store.rows[0]) {
+    if (!store.rows[0]) {
       throw new ClientError(400, `the store id of: ${storeId} does not exist`);
     }
     const sql2 = `
@@ -74,7 +68,7 @@ app.get('/api/stores/:storeId', async (req, res, next) => {
         reviews: reviews.rows
       }
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
@@ -100,9 +94,9 @@ app.post('/api/stores', async (req, res, next) => {
 
 app.put('/api/stores/:storeId', async (req, res, next) => {
   try {
-    const {name, location, priceRange} = req.body;
+    const { name, location, priceRange } = req.body;
     const storeId = Number(req.params.storeId);
-    if(!Number.isInteger(storeId) || storeId < 1) {
+    if (!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
     const sql = `
@@ -115,11 +109,11 @@ app.put('/api/stores/:storeId', async (req, res, next) => {
     `;
     const params = [name, location, priceRange, storeId];
     const result = await db.query(sql, params);
-    if(!result.rows[0]) {
+    if (!result.rows[0]) {
       throw new ClientError(400, 'this id does not exist');
     }
     res.json(result.rows[0]);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
@@ -127,7 +121,7 @@ app.put('/api/stores/:storeId', async (req, res, next) => {
 app.delete('/api/stores/:storeId', async (req, res, next) => {
   try {
     const storeId = Number(req.params.storeId);
-    if(!Number.isInteger(storeId) || storeId < 1) {
+    if (!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
     if (!storeId) {
@@ -138,27 +132,27 @@ app.delete('/api/stores/:storeId', async (req, res, next) => {
       where "storeId" = $1
       returning *
     `;
-    const params = [storeId]
+    const params = [storeId];
     const result = await db.query(sql, params);
     if (!result.rows[0]) {
       throw new ClientError(400, 'deleted store not found');
     }
     res.json(result.rows[0]);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 });
 
-app.post("/api/stores/:storeId/addReview", async (req, res, next) => {
+app.post('/api/stores/:storeId/addReview', async (req, res, next) => {
   try {
     const storeId = Number(req.params.storeId);
-    if(!Number.isInteger(storeId) || storeId < 1) {
+    if (!Number.isInteger(storeId) || storeId < 1) {
       throw new ClientError(400, 'id must be a positive integer');
     }
-    if(!storeId) {
+    if (!storeId) {
       throw new ClientError(400, 'invalid id');
     }
-    const {name, review, rating} = req.body;
+    const { name, review, rating } = req.body;
     if (!name || !review || !rating) {
       throw new ClientError(400, 'name, review, and rating are required');
     }
@@ -169,7 +163,7 @@ app.post("/api/stores/:storeId/addReview", async (req, res, next) => {
     `;
     const params = [storeId, name, review, rating];
     const newReview = await db.query(sql, params);
-    if(!newReview.rows[0]) {
+    if (!newReview.rows[0]) {
       throw new ClientError(400, 'error when submitting review');
     }
     res.status(201).json({
@@ -177,11 +171,11 @@ app.post("/api/stores/:storeId/addReview", async (req, res, next) => {
       data: {
         review: newReview.rows[0]
       }
-    })
-  } catch(err) {
+    });
+  } catch (err) {
     next(err);
   }
-})
+});
 
 app.use(errorMiddleware);
 
