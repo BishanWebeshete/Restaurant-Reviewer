@@ -69,6 +69,13 @@ body {
   border-radius: 0.25rem;
 }
 
+.update-text {
+  border: 0.25rem solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+}
+
 .review-text {
   border: 0.25rem solid black;
   padding-left: 1rem;
