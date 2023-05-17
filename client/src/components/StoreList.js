@@ -82,7 +82,7 @@ function StoreList(props) {
   }
 
   return(
-    <div className="list-group container table-responsive">
+    <div className="list-group container overflow-auto">
       <table className="table text-white">
         <thead className="bg-primary">
           <tr>

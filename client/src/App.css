@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .main-header {
   display: flex;
   text-align: center;
@@ -10,13 +14,13 @@ table {
   width: 100%;
 }
 
-.add-restaurant-button {
+/* .add-restaurant-button {
   padding-left: 1.25rem;
-}
+} */
 
 .add-restaurant-select {
   height: 2rem;
-  width: 105px;
+  width: 5rem;
 }
 
 body {
@@ -25,6 +29,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   margin: 0;
+  width: 100%;
 }
 
 .loading-container {
@@ -58,25 +63,13 @@ body {
   padding-left: 1.5rem;
 }
 
-.new-store-form {
+/* .new-store-form {
   padding-left: 1.75rem;
-}
+} */
 
+.update-text,
+.review-text,
 .main-text {
-  border: 0.25rem solid black;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 0.25rem;
-}
-
-.update-text {
-  border: 0.25rem solid black;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 0.25rem;
-}
-
-.review-text {
   border: 0.25rem solid black;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -88,10 +81,14 @@ body {
   justify-content: center;
 }
 
+tbody {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
-  .add-restaurant-button {
+  /* .add-restaurant-button {
     width: 1rem;
-  }
+  } */
   .add-restaurant-select-container {
     margin-bottom: 0.25rem;
   }
