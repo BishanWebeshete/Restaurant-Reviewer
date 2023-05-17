@@ -32,8 +32,8 @@ function AddStore () {
   }
 
   return (
-    <div className="mb-4 d-flex justify-content-center form-container new-store-form">
-        <form className="row row-col-4 g-4 form-inline">
+      <div className="mb-4 form-container new-store-form">
+        <form className="d-flex flex-wrap g-4 form-inline">
           <div className="col-3">
             <input
             value={name}
@@ -52,7 +52,7 @@ function AddStore () {
           </div>
           <div className="col-3 add-restaurant-select-container">
             <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="custom-select my-1 mr-sm-2 add-restaurant-select">
-              <option disabled value="">Price Range</option>
+              <option disabled value="">Price</option>
               <option value="1">$</option>
               <option value="2">$$</option>
               <option value="3">$$$</option>
