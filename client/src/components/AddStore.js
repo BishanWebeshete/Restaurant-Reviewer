@@ -32,39 +32,44 @@ function AddStore () {
   }
 
   return (
-      <div className="mb-4 form-container new-store-form">
-        <form className="d-flex flex-wrap g-4 form-inline">
-          <div className="col-3">
-            <input
+      <form className="form">
+        <div className="form-group">
+          <label htmlFor="input1">Name</label>
+          <input
             value={name}
             onChange={(e)=>setName(e.target.value)}
             type="text"
             className="form-control"
-            placeholder="Name" />
-          </div>
-          <div className="col-3">
-            <input
+            id="input1"
+            placeholder="Store Name"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="input2">Location</label>
+          <input
             value={location}
             onChange={(e)=>setLocation(e.target.value)}
             type="text"
             className="form-control"
-            placeholder="Location" />
-          </div>
-          <div className="col-3 add-restaurant-select-container">
-            <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="custom-select my-1 mr-sm-2 add-restaurant-select">
-              <option disabled value="">Price</option>
-              <option value="1">$</option>
-              <option value="2">$$</option>
-              <option value="3">$$$</option>
-              <option value="4">$$$$</option>
-              <option value="5">$$$$$</option>
-            </select>
-          </div>
-          <div className="col-3 add-restaurant-button">
-            <button onClick={handleSubmit} type="submit" className="btn btn-primary mb-3">Submit</button>
-          </div>
-        </form>
-      </div>
+            id="input2"
+            placeholder="Store Location"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="input3">Price Range</label>
+          <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="form-control" id="input3">
+            <option disabled value="">Price Range</option>
+            <option value="1">$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4">$$$$</option>
+            <option value="5">$$$$$</option>
+          </select>
+        </div>
+        <button onClick={handleSubmit} type="submit" className="btn btn-primary form-button">
+          Submit
+        </button>
+      </form>
   )
 }
 export default AddStore;
