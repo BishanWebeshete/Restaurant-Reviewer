@@ -6,6 +6,10 @@
   padding-top: 1rem;
 }
 
+.navbar {
+  padding-left: 1rem;
+}
+
 table {
   width: 100%;
 }
