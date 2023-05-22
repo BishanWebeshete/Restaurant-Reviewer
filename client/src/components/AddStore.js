@@ -32,7 +32,7 @@ function AddStore () {
   }
 
   return (
-      <form className="form">
+      <form className="form store-form">
         <div className="form-group">
           <label htmlFor="input1">Name</label>
           <input

@@ -63,6 +63,7 @@ function UpdateStore () {
         <input value={location} onChange={(e)=> setLocation(e.target.value)} id="location" className="form-control"></input>
       </div>
       <div className="form-group mt-4">
+        <label htmlFor="priceRange" className="label-container bg-warning">Price Range</label>
         <select value={priceRange} onChange={(e)=> setPriceRange(e.target.value)} className="form-select">
           <option>Price Range</option>
           <option value="1">$</option>

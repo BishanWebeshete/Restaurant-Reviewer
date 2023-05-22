@@ -1,17 +1,11 @@
 .main-header {
   display: flex;
-  text-align: center;
-  align-items: center;
   justify-content: center;
   padding-top: 1rem;
 }
 
 .navbar {
   padding-left: 1rem;
-}
-
-table {
-  width: 100%;
 }
 
 .form {
@@ -82,4 +76,21 @@ body {
 
 tbody {
   cursor: pointer;
+}
+
+.list-group {
+  padding-left: 0.5rem;
+}
+
+@media screen and (max-width: 992px) {
+  .store-form {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .list-group {
+    max-width: 90%;
+    overflow-x: scroll;
+  }
 }
