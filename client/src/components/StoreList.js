@@ -97,7 +97,7 @@ function StoreList(props) {
         <tbody className="bg-dark">
           {stores.map(store => {
             return (
-              <tr onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
+              <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
                 <td className="td">{store.name}</td>
                 <td>{store.location}</td>
                 <td>{"$".repeat(store.priceRange)}</td>
