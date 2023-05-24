@@ -83,6 +83,11 @@ tbody {
   padding-left: 1rem;
 }
 
+.table-rows:hover {
+  background-color: #7b7b7b;
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 992px) {
   .store-form {
     max-width: 70%;
