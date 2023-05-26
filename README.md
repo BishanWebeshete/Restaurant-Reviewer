@@ -29,9 +29,9 @@ Try the application live at:
 
 ## Preview
 
-![Retail-Rater](client/public/Kapture%202023-05-26%20at%2015.22.26.gif)
+![Retail-Rater](client/public/Kapture%202023-05-26%20at%2015.43.12.gif)
 
-![Retail-Rater](client/public/Kapture%202023-05-26%20at%2015.24.39.gif)
+![Retail-Rater](client/public/Kapture%202023-05-26%20at%2015.46.12.gif)
 
 ## Stretch Feature(s)
 
