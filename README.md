@@ -6,7 +6,7 @@ This project was created using PostgreSQL, Express, React, and Node along with B
 
 ## Live Demo
 
-Try the application live at:
+Try the application live at: https://retail-rater.azurewebsites.net/
 
 ## Technologies Used
 
