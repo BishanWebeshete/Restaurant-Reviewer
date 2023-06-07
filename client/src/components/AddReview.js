@@ -41,11 +41,11 @@ function AddReview() {
         <form action="">
           <div className="row g-3">
             <div className="form-group col">
-              <label htmlFor="name" className="fw-bolder bg-warning label-container">Name</label>
+              <label htmlFor="name" className="mb-2 fw-bolder bg-warning label-container">Name</label>
               <input onChange={(e) => setName(e.target.value)} value={name} id="name" placeholder="name" type="text" className="form-control"></input>
             </div>
             <div className="form-group col">
-              <label htmlFor="rating" className="fw-bolder bg-warning label-container">Rating</label>
+              <label htmlFor="rating" className="mb-2 fw-bolder bg-warning label-container">Rating</label>
               <div>
                 <select onChange={(e) => setRating(e.target.value)} value={rating} id="rating" className="form-select">
                   <option disabled value="">Rating</option>
@@ -59,10 +59,10 @@ function AddReview() {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="Review" className="fw-bolder bg-warning label-container">Review</label>
+            <label htmlFor="Review" className="mb-2 mt-2 fw-bolder bg-warning label-container">Review</label>
             <textarea onChange={(e) => setReviewText(e.target.value)} value={reviewText} id="Review" className="form-control"></textarea>
           </div>
-          <button type="submit" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+          <button type="submit" onClick={handleSubmit} className="mt-3 btn btn-primary">Submit</button>
         </form>
       </div>
     </>
