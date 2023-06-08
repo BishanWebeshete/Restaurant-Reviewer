@@ -11,6 +11,7 @@ function StoreList(props) {
   const { stores, setStores } = useContext(StoresContext)
   const history = useNavigate();
   const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     async function getStores() {
@@ -24,6 +25,7 @@ function StoreList(props) {
         setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsError(true);
       }
     }
     getStores();
@@ -69,13 +71,13 @@ function StoreList(props) {
     )
   }
 
-  if (stores === undefined) {
+  if (isError) {
     return (
       <ErrorMessage text={"stores"} />
     )
   }
 
-  if(isLoading === true) {
+  if(isLoading) {
     return (
       <LoadingSpinner />
     )
