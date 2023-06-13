@@ -6,6 +6,15 @@ drop schema "public" cascade;
 
 create schema "public";
 
+CREATE TABLE "public"."users" (
+  "userId"          serial,
+  "username"        text      NOT NULL,
+  "hashedPassword"  text      NOT NULL,
+  "createdAt"       timestamptz(6)  NOT NULL default now(),
+  primary key ("userId"),
+  unique ("username")
+);
+
 CREATE TABLE "public"."stores" (
 	"storeId"      serial   NOT NULL,
 	"name"         text     NOT NULL,
@@ -13,8 +22,6 @@ CREATE TABLE "public"."stores" (
 	"priceRange"   int      NOT NULL check("priceRange" >= 1 and "priceRange" <= 5),
   PRIMARY KEY ("storeId")
 );
-
-
 
 CREATE TABLE "public"."reviews" (
 	"id"            serial   NOT NULL,
