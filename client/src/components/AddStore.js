@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import StoresContext from '../context/StoresContext';
 
 function AddStore () {
-  const { addStores } = useContext(StoresContext)
+  const { user, addStores } = useContext(StoresContext);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [priceRange, setPriceRange] = useState("");
@@ -16,6 +16,7 @@ function AddStore () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          createdBy: user.username,
           name,
           location,
           priceRange

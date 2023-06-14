@@ -34,7 +34,7 @@ export default function AuthForm({ action, onSignIn }) {
   return (
     <form className="w-100" onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label className="form-label">
+        <label htmlFor="username" className="form-label">
           Username:
           <input
             required
@@ -45,7 +45,7 @@ export default function AuthForm({ action, onSignIn }) {
         </label>
       </div>
       <div className="mb-3">
-        <label className="form-label">
+        <label htmlFor="password" className="form-label">
           Password:
           <input
             required
