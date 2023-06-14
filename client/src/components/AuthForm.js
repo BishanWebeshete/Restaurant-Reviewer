@@ -27,7 +27,7 @@ export default function AuthForm({ action, onSignIn }) {
     : '/sign-up';
   const alternateActionText = action === 'sign-up'
     ? 'Sign in instead'
-    : 'Register now';
+    : 'No account? Register now';
   const submitButtonText = action === 'sign-up'
     ? 'Register'
     : 'Log In';
@@ -64,7 +64,7 @@ export default function AuthForm({ action, onSignIn }) {
           {submitButtonText}
         </button>
       </div>
-      {error && <div style={{ color: 'red' }}>Error: {error.message}</div>}
+      {error && <div style={{ color: 'red' }}>Error: Invalid Login</div>}
     </form>
   );
 }

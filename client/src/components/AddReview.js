@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import StoresContext from '../context/StoresContext';
 
 function AddReview() {
-  const [name, setName] = useState("");
+  const {user} = useContext(StoresContext);
+  // const [name, setName] = useState("");
   const [rating, setRating] = useState("");
   const [reviewText, setReviewText] = useState("");
   const { id } = useParams();
@@ -17,7 +19,7 @@ function AddReview() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name,
+          name: user.username,
           review: reviewText,
           rating
         })
@@ -40,10 +42,10 @@ function AddReview() {
       <div className="mb-2">
         <form action="">
           <div className="row g-3">
-            <div className="form-group col">
+            {/* <div className="form-group col">
               <label htmlFor="name" className="mb-2 fw-bolder bg-warning label-container">Name</label>
               <input onChange={(e) => setName(e.target.value)} value={name} id="name" placeholder="name" type="text" className="form-control"></input>
-            </div>
+            </div> */}
             <div className="form-group col">
               <label htmlFor="rating" className="mb-2 fw-bolder bg-warning label-container">Rating</label>
               <div>
