@@ -8,8 +8,8 @@ create schema "public";
 
 CREATE TABLE "public"."users" (
   "userId"          serial,
-  "username"        text      NOT NULL,
-  "hashedPassword"  text      NOT NULL,
+  "username"        text            NOT NULL,
+  "hashedPassword"  text            NOT NULL,
   "createdAt"       timestamptz(6)  NOT NULL default now(),
   primary key ("userId"),
   unique ("username")
@@ -17,6 +17,7 @@ CREATE TABLE "public"."users" (
 
 CREATE TABLE "public"."stores" (
 	"storeId"      serial   NOT NULL,
+  "createdBy"    text     NOT NULL,
 	"name"         text     NOT NULL,
 	"location"     text     NOT NULL,
 	"priceRange"   int      NOT NULL check("priceRange" >= 1 and "priceRange" <= 5),

@@ -77,16 +77,16 @@ app.get('/api/stores/:storeId', async (req, res, next) => {
 
 app.post('/api/stores', async (req, res, next) => {
   try {
-    const { name, location, priceRange } = req.body;
+    const { createdBy, name, location, priceRange } = req.body;
     if (!name || !location || !priceRange) {
       throw new ClientError(400, 'name, location, and priceRange are required');
     }
     const sql = `
-    insert into "stores" ("name", "location", "priceRange")
-      values ($1, $2, $3)
+    insert into "stores" ("createdBy", "name", "location", "priceRange")
+      values ($1, $2, $3, $4)
       returning *
     `;
-    const params = [name, location, priceRange];
+    const params = [createdBy, name, location, priceRange];
     const result = await db.query(sql, params);
     res.json(result.rows[0]);
   } catch (err) {
