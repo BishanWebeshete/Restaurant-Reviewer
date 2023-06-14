@@ -64,7 +64,7 @@ export default function AuthForm({ action, onSignIn }) {
           {submitButtonText}
         </button>
       </div>
-      {error && <div style={{ color: 'red' }}>Error: {error.message}</div>}
+      {error && <div style={{ color: 'red' }}>Error: Invalid Login</div>}
     </form>
   );
 }

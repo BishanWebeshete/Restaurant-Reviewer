@@ -1,16 +1,17 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import StoresContext from '../context/StoresContext';
 import Reviews from '../components/Reviews';
 import AddReview from '../components/AddReview';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Navbar from '../components/Navbar';
 
-
 function StoreDetails () {
-  const {selectedStore, setSelectedStore} = useContext(StoresContext);
+  const history = useNavigate();
+  const {user, selectedStore, setSelectedStore} = useContext(StoresContext);
   const { id } = useParams();
   useEffect(() => {
+    if(!user) history('/sign-in');
     async function getData () {
       try {
         const response = await fetch (`/api/stores/${id}`)
@@ -25,7 +26,7 @@ function StoreDetails () {
     }
     getData();
   // eslint-disable-next-line react-hooks/exhaustive-deps -- Run once on mount
-  }, []);
+  }, [user]);
 
   if (selectedStore === undefined) {
     return (
