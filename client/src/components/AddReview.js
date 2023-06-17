@@ -42,10 +42,6 @@ function AddReview() {
       <div className="mb-2">
         <form action="">
           <div className="row g-3">
-            {/* <div className="form-group col">
-              <label htmlFor="name" className="mb-2 fw-bolder bg-warning label-container">Name</label>
-              <input onChange={(e) => setName(e.target.value)} value={name} id="name" placeholder="name" type="text" className="form-control"></input>
-            </div> */}
             <div className="form-group col">
               <label htmlFor="rating" className="mb-2 fw-bolder bg-warning label-container">Rating</label>
               <div>
