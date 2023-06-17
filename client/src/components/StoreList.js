@@ -8,9 +8,9 @@ import LoadingSpinner from './LoadingSpinner';
 
 
 function StoreList(props) {
-  const { user, stores, setStores } = useContext(StoresContext)
+  const { user, stores, setStores } = useContext(StoresContext);
   const history = useNavigate();
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -100,7 +100,7 @@ function StoreList(props) {
           {stores.map(store => {
             if(user && store.createdBy !== user.username) {
               return (
-                <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
+              <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
                 <td className="td">{store.name}</td>
                 <td>{store.location}</td>
                 <td>{"$".repeat(store.priceRange)}</td>
