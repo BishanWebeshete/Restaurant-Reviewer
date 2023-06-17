@@ -4,7 +4,6 @@ import StoresContext from '../context/StoresContext';
 
 function AddReview() {
   const {user} = useContext(StoresContext);
-  // const [name, setName] = useState("");
   const [rating, setRating] = useState("");
   const [reviewText, setReviewText] = useState("");
   const { id } = useParams();

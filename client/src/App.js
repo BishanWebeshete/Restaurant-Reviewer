@@ -1,10 +1,8 @@
-// import { useEffect, useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import StoreDetails from './routes/StoreDetails';
 import UpdatePage from './routes/UpdatePage';
-// import { StoresContextProvider } from './context/StoresContext';
 import React, {useEffect, useState} from 'react';
 import StoresContext from './context/StoresContext';
 import jwtDecode from 'jwt-decode';
