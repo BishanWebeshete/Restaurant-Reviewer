@@ -41,7 +41,7 @@ function StoreDetails () {
         <div className="d-flex justify-content-center">
           <h1 className="text-center display-1 d-inline-block bg-danger title">{selectedStore.store.name}</h1>
         </div>
-        <div className="d-flex align-items-center justify-content-center container">
+        <div className="d-flex justify-content-center container">
           <Reviews reviews={selectedStore.reviews}/>
         </div>
         <div className="container">
