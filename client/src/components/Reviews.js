@@ -14,7 +14,7 @@ export default function Reviews ({reviews}) {
       {reviews?.map(({id, name, rating, review}) => {
         return (
           <div key={id} className="card text-white mb-3 mx-auto p-2 border-0">
-            <div className=" card-header d-flex justify-content-between bg-primary">
+            <div className="card-header d-flex justify-content-between bg-primary">
               <span>{name}</span>
               <span className="d-flex flex-nowrap"><StarRating rating={rating} /></span>
             </div>

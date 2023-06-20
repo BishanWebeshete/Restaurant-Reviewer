@@ -61,20 +61,11 @@ body {
   padding-right: 1rem;
 }
 
-/* .navbar-text {
-  padding-left: 1.5rem;
-  padding-top: 1.25rem;
-} */
-
 .sign-out-button {
   margin-right: 1rem;
   border-radius: 1rem;
   border: 0.25rem solid black;
 }
-
-/* .stores-button {
-  margin-right: 3rem;
-} */
 
 .retail-rater-text {
   text-decoration: none;
