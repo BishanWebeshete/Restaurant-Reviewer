@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import StoresContext from '../context/StoresContext';
 
-function AddStore () {
+export default function AddStore () {
   const { user, addStores } = useContext(StoresContext);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -73,4 +73,3 @@ function AddStore () {
       </form>
   )
 }
-export default AddStore;

@@ -3,7 +3,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BsStarHalf } from 'react-icons/bs';
 
-function StarRating ({rating}) {
+export default function StarRating ({rating}) {
   const style = { color: "yellow" }
 
   const stars = [];
@@ -23,5 +23,3 @@ function StarRating ({rating}) {
     </>
   )
 }
-
-export default StarRating
