@@ -1,4 +1,4 @@
-function LoadingSpinner () {
+export default function LoadingSpinner () {
   return (
     <div className="loading-container d-flex justify-content-center">
       <div className="text-center">
@@ -9,4 +9,3 @@ function LoadingSpinner () {
     </div>
   )
 }
-export default LoadingSpinner;

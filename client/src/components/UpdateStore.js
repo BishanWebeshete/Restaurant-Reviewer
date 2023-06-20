@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function UpdateStore () {
+export default function UpdateStore () {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -77,4 +77,3 @@ function UpdateStore () {
     </form>
   )
 }
-export default UpdateStore;

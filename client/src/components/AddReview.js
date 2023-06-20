@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import StoresContext from '../context/StoresContext';
 
-function AddReview() {
+export default function AddReview() {
   const {user} = useContext(StoresContext);
   const [rating, setRating] = useState("");
   const [reviewText, setReviewText] = useState("");
@@ -65,5 +65,3 @@ function AddReview() {
     </>
   )
 }
-
-export default AddReview

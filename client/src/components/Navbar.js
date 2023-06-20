@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import StoresContext from '../context/StoresContext';
 
-function Navbar() {
+export default function Navbar() {
   const {handleSignOut} = useContext(StoresContext);
 
   return (
@@ -11,4 +11,3 @@ function Navbar() {
     </nav>
   )
 }
-export default Navbar;

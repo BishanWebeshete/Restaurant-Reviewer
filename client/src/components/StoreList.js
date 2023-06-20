@@ -7,7 +7,7 @@ import ErrorMessage from './ErrorMessage';
 import LoadingSpinner from './LoadingSpinner';
 
 
-function StoreList(props) {
+export default function StoreList(props) {
   const { user, stores, setStores } = useContext(StoresContext);
   const history = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -127,4 +127,3 @@ function StoreList(props) {
     </div>
   )
 }
-export default StoreList;
