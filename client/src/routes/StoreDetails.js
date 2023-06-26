@@ -12,6 +12,7 @@ function StoreDetails () {
   const { id } = useParams();
   useEffect(() => {
     if(!user) history('/sign-in');
+    setSelectedStore(undefined);
     async function getData () {
       try {
         const response = await fetch (`/api/stores/${id}`)
