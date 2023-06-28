@@ -40,7 +40,7 @@ function StoreDetails () {
       <>
         <Navbar />
         <div className="d-flex justify-content-center">
-          <h1 className="text-center display-1 d-inline-block bg-danger title">{selectedStore.store.name}</h1>
+          <h1 className="text-center text-warning display-1 d-inline-block bg-secondary pb-2 title">{selectedStore.store.name}</h1>
         </div>
         <div className="d-flex justify-content-center container">
           <Reviews reviews={selectedStore.reviews}/>
