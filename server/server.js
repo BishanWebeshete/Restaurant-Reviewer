@@ -179,6 +179,31 @@ app.post('/api/stores/:storeId/addReview', async (req, res, next) => {
   }
 });
 
+app.delete('/api/reviews/:reviewId/deleteReview', async (req, res, next) => {
+  try {
+    const reviewId = Number(req.params.reviewId);
+    if (!Number.isInteger(reviewId) || reviewId < 1) {
+      throw new ClientError(400, 'id must be a positive integer');
+    }
+    if (!reviewId) {
+      throw new ClientError(400, 'invalid Id');
+    }
+    const sql = `
+    delete from "reviews"
+      where "id" = $1
+      returning *
+    `;
+    const params = [reviewId];
+    const result = await db.query(sql, params);
+    if (!result.rows[0]) {
+      throw new ClientError(400, 'deleted review not found');
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.post('/api/auth/sign-up', async (req, res, next) => {
   try {
     const { username, password } = req.body;
