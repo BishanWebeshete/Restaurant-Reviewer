@@ -46,7 +46,7 @@ export default function Reviews ({reviews}) {
             </div>
             <div className="card-body bg-primary rounded-bottom d-flex justify-content-between">
               <p className="card-text">{review}</p>
-              <div>
+              <div className="trash-icon">
                 <BsFillTrashFill onClick={() => handleDelete(id)}/>
               </div>
             </div>

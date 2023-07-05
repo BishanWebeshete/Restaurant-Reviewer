@@ -98,6 +98,10 @@ tbody {
   opacity: 0.5;
 }
 
+.trash-icon:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 992px) {
   .store-form {
     max-width: 70%;
