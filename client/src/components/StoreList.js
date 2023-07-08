@@ -71,7 +71,7 @@ export default function StoreList(props) {
     )
   }
 
-  if (isError) {
+  if(isError) {
     return (
       <ErrorMessage text={"stores"} />
     )
@@ -84,6 +84,10 @@ export default function StoreList(props) {
   }
 
   return(
+    <>
+    <div className="d-flex justify-content-center">
+      {stores ? <h3 className="bg-secondary text-warning main-text">Please Click a Store</h3> : null}
+    </div>
     <div className="list-group container overflow-auto">
       <table className="table text-white">
         <thead className="bg-primary">
@@ -125,5 +129,6 @@ export default function StoreList(props) {
         </tbody>
       </table>
     </div>
+    </>
   )
 }
