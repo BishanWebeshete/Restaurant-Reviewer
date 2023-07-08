@@ -10,7 +10,7 @@ import Auth from './routes/AuthPage';
 
 const tokenKey = 'react-context-jwt';
 
-function App() {
+export default function App() {
   const [user, setUser] = useState();
   const [isAuthorizing, setIsAuthorizing] = useState(true);
   const [stores, setStores] = useState(undefined);
@@ -52,5 +52,3 @@ function App() {
     </StoresContext.Provider>
   )
 }
-
-export default App;
