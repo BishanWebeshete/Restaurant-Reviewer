@@ -102,15 +102,15 @@ export default function StoreList(props) {
         </thead>
         <tbody className="bg-dark">
           {stores.map(store => {
-            if(user && store.createdBy !== user.username) {
+            if((user && store.createdBy === user.username) || user.username === 'Admin') {
               return (
               <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
                 <td className="td">{store.name}</td>
                 <td>{store.location}</td>
                 <td>{"$".repeat(store.priceRange)}</td>
                 <td>{renderRating(store)}</td>
-                <td><button className="btn btn-secondary"><AiFillEdit/></button></td>
-                <td><button className="btn btn-secondary"><AiOutlineDelete/></button></td>
+                <td><button onClick={(e) => handleUpdate(e, store.storeId)} className="btn btn-warning"><AiFillEdit/></button></td>
+                <td><button onClick={(e) => handleDelete(e, store.storeId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
               </tr>
               )
             } else {
@@ -120,8 +120,8 @@ export default function StoreList(props) {
                 <td>{store.location}</td>
                 <td>{"$".repeat(store.priceRange)}</td>
                 <td>{renderRating(store)}</td>
-                <td><button onClick={(e) => handleUpdate(e, store.storeId)} className="btn btn-warning"><AiFillEdit/></button></td>
-                <td><button onClick={(e) => handleDelete(e, store.storeId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
+                <td><button className="btn btn-secondary"><AiFillEdit/></button></td>
+                <td><button className="btn btn-secondary"><AiOutlineDelete/></button></td>
               </tr>
             )
             }

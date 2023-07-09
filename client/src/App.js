@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './routes/Home';
 import StoreDetails from './routes/StoreDetails';
 import UpdatePage from './routes/UpdatePage';
@@ -15,6 +15,7 @@ export default function App() {
   const [isAuthorizing, setIsAuthorizing] = useState(true);
   const [stores, setStores] = useState(undefined);
   const [selectedStore, setSelectedStore] = useState(undefined);
+  const history = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem(tokenKey);
@@ -34,6 +35,7 @@ export default function App() {
   function handleSignOut(result) {
     localStorage.removeItem(tokenKey);
     setUser(undefined);
+    history('/sign-in');
   }
 
   const addStores = (store) => {
