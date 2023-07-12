@@ -15,6 +15,10 @@ export async function signUpOrIn(action, username, password) {
     body: JSON.stringify({username, password}),
   };
   const res = await fetch(`api/auth/${action}`, req);
+  if (res.status === 400) {
+   const response = await res.json();
+   throw new Error(response.error);
+  }
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
 }
