@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import errorMiddleware from './lib/error-middleware.js';
 import pg from 'pg';
-import ClientError from './client-error.js';
+import ClientError from './lib/client-error.js';
 import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 
@@ -212,13 +212,23 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     }
     const hashedPassword = await argon2.hash(password);
     const sql = `
+    select "username"
+      from "users"
+      where "username" = $1
+    `;
+    const params = [username];
+    const result = await db.query(sql, params);
+    if (result.rows.length > 0) {
+      throw new ClientError(400, 'Username already exists');
+    }
+    const sql2 = `
       insert into "users" ("username", "hashedPassword")
         values ($1, $2)
         returning "userId", "username", "createdAt"
     `;
-    const params = [username, hashedPassword];
-    const result = await db.query(sql, params);
-    const [user] = result.rows;
+    const params2 = [username, hashedPassword];
+    const result2 = await db.query(sql2, params2);
+    const [user] = result2.rows;
     res.status(201).json(user);
   } catch (err) {
     next(err);

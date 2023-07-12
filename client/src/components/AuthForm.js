@@ -18,7 +18,7 @@ export default function AuthForm({ action, onSignIn }) {
         onSignIn(result);
       }
     } catch (err) {
-      setError(err);
+      setError(err.message);
     }
   }
 
@@ -64,7 +64,7 @@ export default function AuthForm({ action, onSignIn }) {
           {submitButtonText}
         </button>
       </div>
-      {error && <div style={{ color: 'red' }}>Error: Invalid Login</div>}
+      {error && <div style={{ color: 'red' }}>{error && error}</div>}
     </form>
   );
 }
