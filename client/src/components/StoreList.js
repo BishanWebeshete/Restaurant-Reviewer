@@ -12,6 +12,7 @@ export default function StoreList(props) {
   const history = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(true);
 
   useEffect(() => {
     async function getStores() {
@@ -71,6 +72,16 @@ export default function StoreList(props) {
     )
   }
 
+  const handleUnauthorized = (e) => {
+    e.stopPropagation();
+    setIsAuthorized(false);
+    setTimeout(() => {
+      setIsAuthorized(true);
+    }, 3000);
+    clearTimeout();
+    console.log(isAuthorized);
+  }
+
   if(isError) {
     return (
       <ErrorMessage text={"stores"} />
@@ -87,6 +98,9 @@ export default function StoreList(props) {
     <>
     <div className="d-flex justify-content-center">
       {stores ? <h3 className="bg-secondary text-warning main-text">Please Click a Store</h3> : null}
+    </div>
+    <div className="d-flex justify-content-center">
+      {!isAuthorized ? <h4 className="bg-danger text-black main-text">You are not the author of this store!</h4> : null}
     </div>
     <div className="list-group container overflow-auto">
       <table className="table text-white">
@@ -120,8 +134,8 @@ export default function StoreList(props) {
                 <td>{store.location}</td>
                 <td>{"$".repeat(store.priceRange)}</td>
                 <td>{renderRating(store)}</td>
-                <td><button className="btn btn-secondary"><AiFillEdit/></button></td>
-                <td><button className="btn btn-secondary"><AiOutlineDelete/></button></td>
+                <td><button onClick={(e)=> handleUnauthorized(e)} className="btn btn-secondary"><AiFillEdit/></button></td>
+                <td><button onClick={(e)=> handleUnauthorized(e)} className="btn btn-secondary"><AiOutlineDelete/></button></td>
               </tr>
             )
             }
