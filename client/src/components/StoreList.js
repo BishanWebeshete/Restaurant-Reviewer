@@ -79,7 +79,6 @@ export default function StoreList(props) {
       setIsAuthorized(true);
     }, 3000);
     clearTimeout();
-    console.log(isAuthorized);
   }
 
   if(isError) {
