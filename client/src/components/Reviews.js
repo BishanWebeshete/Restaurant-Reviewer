@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import StarRating from './StarRating';
 import ErrorMessage from './ErrorMessage';
-import {BsFillTrashFill} from 'react-icons/bs';
-import {useNavigate} from 'react-router-dom';
+import { BsFillTrashFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import StoresContext from '../context/StoresContext';
 
 export default function Reviews ({reviews}) {
