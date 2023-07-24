@@ -7,7 +7,6 @@ import React, {useEffect, useState} from 'react';
 import StoresContext from './context/StoresContext';
 import jwtDecode from 'jwt-decode';
 import Auth from './routes/AuthPage';
-
 const tokenKey = 'react-context-jwt';
 
 export default function App() {
