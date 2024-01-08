@@ -26,8 +26,8 @@ export default function AuthForm({ action, onSignIn }) {
     ? '/sign-in'
     : '/sign-up';
   const alternateActionText = action === 'sign-up'
-    ? 'Sign in instead'
-    : 'No account? Register now';
+    ? 'Sign in'
+    : 'Register now';
   const submitButtonText = action === 'sign-up'
     ? 'Register'
     : 'Log In';
@@ -54,15 +54,18 @@ export default function AuthForm({ action, onSignIn }) {
             className="form-control bg-light" />
         </label>
       </div>
-      <div className="d-flex justify-content-between align-items-center">
-        <small>
-          <Link className="text-muted" to={alternateActionTo}>
-            {alternateActionText}
-          </Link>
-        </small>
-        <button type="submit" className="btn btn-primary">
+      <div className="d-flex flex-column align-items-center">
+        <button type="submit" className="btn btn-primary register-or-login">
           {submitButtonText}
         </button>
+        <small className="mt-1">
+          <Link className="text-muted" to={alternateActionTo}>
+            {action === 'sign-up' ? `already have an account? ${alternateActionText}` : `don't have an account? ${alternateActionText}`}
+          </Link>
+        </small>
+        {/* <button type="submit" className="btn btn-primary">
+          {submitButtonText}
+        </button> */}
       </div>
       {error && <div style={{ color: 'red' }}>{error && error}</div>}
     </form>
