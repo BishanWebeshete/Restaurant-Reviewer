@@ -18,12 +18,12 @@ export default function AuthPage({action}) {
   return (
     <div className="row pt-5 align-items-center">
       <div className="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-xl-4 offset-xl-4">
-        <header className="text-center mb-1 pt-2 bg-primary welcome-header">
+        <header className="text-center mb-1 pt-2 welcome-header">
           <h2 className="mb-2">
             <BsFillCartCheckFill className="mr-2" />
             Welcome to Retail Rater!
           </h2>
-          <p className="mb-4">{welcomeMessage}</p>
+          <p className="mb-4 text-secondary welcome-message">{welcomeMessage}</p>
         </header>
         <div className="card p-3">
           <AuthForm
