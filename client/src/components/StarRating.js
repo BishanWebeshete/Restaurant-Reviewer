@@ -4,7 +4,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BsStarHalf } from 'react-icons/bs';
 
 export default function StarRating ({rating}) {
-  const style = { color: "yellow" }
+  const style = { color: "#F07E0F" }
 
   const stars = [];
   for (let i = 1; i <= 5; i++) {

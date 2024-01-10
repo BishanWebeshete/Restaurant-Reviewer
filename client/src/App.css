@@ -4,6 +4,11 @@
   padding-top: 1rem;
 }
 
+.main-text {
+  font-size: 2rem;
+  padding-top: 1rem;
+}
+
 .navbar {
   padding-left: 1rem;
 }
@@ -30,10 +35,10 @@
 }
 
 body {
-  /* background-image: url("https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdGhlcyUyMHNob3B8ZW58MHx8MHx8&w=1000&q=80");
+  background-image: url("https://us.123rf.com/450wm/thatpichai/thatpichai1703/thatpichai170300308/73868551-supermarket-store-blur-background-with-bokeh.jpg?ver=6");
   background-size: cover;
   background-attachment: fixed;
-  background-position: center; */
+  background-position: center;
   margin: 0;
   width: 100%;
   background-color: #F9FAFB;
@@ -44,32 +49,16 @@ body {
   width: 100vw;
 }
 
-.error-container {
-  border: 0.25rem solid black;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.label-container {
-  border: 0.25rem solid black;
-  border-radius: 0.25rem;
-  padding: 0.15rem;
-  margin: 0.15rem;
-}
-
-.title {
-  margin-top: 1rem;
-  border: 0.25rem solid black;
-  border-radius: 0.25rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.rating-label {
+  font-size: 1.5rem;
 }
 
 .sign-out-button {
   margin-right: 1rem;
   border-radius: 1rem;
-  border: 0.25rem solid black;
+  border: solid black;
+  color: #E11D47;
+  background-color: #F1D8DB;
 }
 
 .retail-rater-text {
@@ -85,20 +74,6 @@ body {
   font-size: 1.25rem;
 }
 
-/* .welcome-header {
-  border: 0.25rem solid black;
-  border-radius: 1rem;
-} */
-
-.update-text,
-.review-text,
-.main-text {
-  border: 0.25rem solid black;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 0.25rem;
-}
-
 tbody {
   cursor: pointer;
 }
@@ -107,8 +82,12 @@ tbody {
   padding-left: 1rem;
 }
 
+.td-blue {
+  color: #0C6DFD;
+}
+
 .table-rows:hover {
-  background-color: #7b7b7b;
+  background-color: lightblue;
   opacity: 0.5;
 }
 

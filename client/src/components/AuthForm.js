@@ -63,9 +63,6 @@ export default function AuthForm({ action, onSignIn }) {
             {action === 'sign-up' ? `already have an account? ${alternateActionText}` : `don't have an account? ${alternateActionText}`}
           </Link>
         </small>
-        {/* <button type="submit" className="btn btn-primary">
-          {submitButtonText}
-        </button> */}
       </div>
       {error && <div style={{ color: 'red' }}>{error && error}</div>}
     </form>

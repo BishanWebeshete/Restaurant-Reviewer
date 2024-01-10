@@ -64,10 +64,12 @@ export default function StoreList(props) {
   }
 
   const renderRating = (store) => {
+    const style = { color: "#F07E0F" }
+
     return (
       <>
         <StarRating rating={store.average_rating} />
-        <span className="text-warning ml-1">({store.count ?? 0})</span>
+        <span style = { style } className="ml-1">({store.count ?? 0})</span>
       </>
     )
   }
@@ -96,10 +98,10 @@ export default function StoreList(props) {
   return(
     <>
     <div className="d-flex justify-content-center">
-      {stores ? <h3 className="bg-secondary text-warning main-text">Please Click a Store</h3> : null}
+      {stores ? <h3 className="main-text">Please Click a Store</h3> : null}
     </div>
     <div className="d-flex justify-content-center">
-      {!isAuthorized ? <h4 className="bg-danger text-black main-text">You are not the author of this store!</h4> : null}
+      {!isAuthorized ? <h4 className="text-danger main-text">You are not the author of this store!</h4> : null}
     </div>
     <div className="list-group container overflow-auto">
       <table className="table text-white">
@@ -113,14 +115,14 @@ export default function StoreList(props) {
             <th scope="col">Remove</th>
           </tr>
         </thead>
-        <tbody className="bg-dark">
+        <tbody className="bg-white">
           {stores.map(store => {
             if((user && store.createdBy === user.username) || user.username === 'Admin') {
               return (
               <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
-                <td className="td">{store.name}</td>
-                <td>{store.location}</td>
-                <td>{"$".repeat(store.priceRange)}</td>
+                <td className="td-blue">{store.name}</td>
+                <td className="text-secondary">{store.location}</td>
+                <td className="text-secondary">{"$".repeat(store.priceRange)}</td>
                 <td>{renderRating(store)}</td>
                 <td><button onClick={(e) => handleUpdate(e, store.storeId)} className="btn btn-warning"><AiFillEdit/></button></td>
                 <td><button onClick={(e) => handleDelete(e, store.storeId)} className="btn btn-danger"><AiOutlineDelete/></button></td>
@@ -129,9 +131,9 @@ export default function StoreList(props) {
             } else {
               return (
               <tr className="table-rows" onClick={() => handleStoreClick(store.storeId)} key={store.storeId}>
-                <td className="td">{store.name}</td>
-                <td>{store.location}</td>
-                <td>{"$".repeat(store.priceRange)}</td>
+                <td className="td-blue">{store.name}</td>
+                <td className="text-secondary">{store.location}</td>
+                <td className="text-secondary">{"$".repeat(store.priceRange)}</td>
                 <td>{renderRating(store)}</td>
                 <td><button onClick={(e)=> handleUnauthorized(e)} className="btn btn-secondary"><AiFillEdit/></button></td>
                 <td><button onClick={(e)=> handleUnauthorized(e)} className="btn btn-secondary"><AiOutlineDelete/></button></td>
