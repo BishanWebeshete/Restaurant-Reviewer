@@ -23,7 +23,7 @@ export default function AuthPage({action}) {
             <BsFillCartCheckFill className="mr-2" />
             Welcome to Retail Rater!
           </h2>
-          <p className="mb-4 text-secondary welcome-message">{welcomeMessage}</p>
+          <p className="mb-4 text-secondary">{welcomeMessage}</p>
         </header>
         <div className="card p-3">
           <AuthForm

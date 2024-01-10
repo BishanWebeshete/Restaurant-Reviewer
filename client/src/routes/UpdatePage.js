@@ -17,7 +17,7 @@ function UpdatePage () {
       <Navbar />
       <div>
         <div className="d-flex justify-content-center">
-          <h1 className="update-text mt-3 display-1 bg-secondary d-inline-block text-warning">Update Store</h1>
+          <h1 className="mt-3 d-inline-block">Update Store</h1>
         </div>
         <UpdateStore />
       </div>
