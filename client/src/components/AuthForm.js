@@ -60,7 +60,7 @@ export default function AuthForm({ action, onSignIn }) {
         </button>
         <small className="mt-1">
           <Link className="text-muted" to={alternateActionTo}>
-            {action === 'sign-up' ? `already have an account? ${alternateActionText}` : `don't have an account? ${alternateActionText}`}
+            {action === 'sign-up' ? `Already have an account? ${alternateActionText}` : `Don't have an account? ${alternateActionText}`}
           </Link>
         </small>
       </div>

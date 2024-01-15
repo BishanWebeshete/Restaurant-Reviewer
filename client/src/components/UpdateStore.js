@@ -53,18 +53,18 @@ export default function UpdateStore () {
   }
 
   return (
-    <form className="container" action="">
+    <form className="container" onSubmit={handleSubmit}>
       <div className="form-group mt-3">
         <label htmlFor="name" className="fw-bold">Name</label>
-        <input value={name} onChange={(e)=> setName(e.target.value)} id="name" className="form-control"></input>
+        <input value={name} onChange={(e)=> setName(e.target.value)} id="name" className="form-control" required></input>
       </div>
       <div className="form-group mt-3">
         <label htmlFor="location" className="label-container fw-bold">Location</label>
-        <input value={location} onChange={(e)=> setLocation(e.target.value)} id="location" className="form-control"></input>
+        <input value={location} onChange={(e)=> setLocation(e.target.value)} id="location" className="form-control" required></input>
       </div>
       <div className="form-group mt-3">
         <label htmlFor="priceRange" className="label-container fw-bold">Price Range</label>
-        <select value={priceRange} onChange={(e)=> setPriceRange(e.target.value)} className="form-select">
+        <select value={priceRange} onChange={(e)=> setPriceRange(e.target.value)} className="form-select" required>
           <option>Price Range</option>
           <option value="1">$</option>
           <option value="2">$$</option>
@@ -73,7 +73,7 @@ export default function UpdateStore () {
           <option value="5">$$$$$</option>
         </select>
       </div>
-      <button type="submit" onClick={handleSubmit} className="btn btn-primary mt-2">Save Changes</button>
+      <button type="submit" className="btn btn-primary mt-2">Save Changes</button>
     </form>
   )
 }
