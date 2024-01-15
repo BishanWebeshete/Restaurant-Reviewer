@@ -39,12 +39,12 @@ export default function AddReview() {
         <h2 className="text-center d-inline-block">Write A Review</h2>
       </div>
       <div className="mb-2">
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div className="row g-3">
             <div className="form-group col">
               <label htmlFor="rating" className="mb-1 fw-bold rating-label">Rating</label>
               <div>
-                <select onChange={(e) => setRating(e.target.value)} value={rating} id="rating" className="form-select">
+                <select onChange={(e) => setRating(e.target.value)} value={rating} id="rating" className="form-select" required>
                   <option disabled value="">Rating</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -57,9 +57,9 @@ export default function AddReview() {
           </div>
           <div className="form-group">
             <label htmlFor="Review" className="mb-1 mt-2 fw-bold rating-label">Review</label>
-            <textarea onChange={(e) => setReviewText(e.target.value)} value={reviewText} id="Review" className="form-control"></textarea>
+            <textarea onChange={(e) => setReviewText(e.target.value)} value={reviewText} id="Review" className="form-control" required></textarea>
           </div>
-          <button type="submit" onClick={handleSubmit} className="mt-2 btn btn-primary">Submit</button>
+          <button type="submit" className="mt-2 btn btn-primary">Submit</button>
         </form>
       </div>
     </>

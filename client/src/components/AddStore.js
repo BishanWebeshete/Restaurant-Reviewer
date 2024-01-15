@@ -33,7 +33,7 @@ export default function AddStore () {
   }
 
   return (
-      <form className="form store-form">
+      <form className="form store-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="input1">Name</label>
           <input
@@ -43,6 +43,7 @@ export default function AddStore () {
             className="form-control"
             id="input1"
             placeholder="Store Name"
+            required
           />
         </div>
         <div className="form-group">
@@ -54,11 +55,12 @@ export default function AddStore () {
             className="form-control"
             id="input2"
             placeholder="Store Location"
+            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="input3">Price Range</label>
-          <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="form-control" id="input3">
+          <select value={priceRange} onChange={(e)=>setPriceRange(e.target.value)} className="form-control" id="input3" required>
             <option disabled value="">Price Range</option>
             <option value="1">$</option>
             <option value="2">$$</option>
@@ -67,7 +69,7 @@ export default function AddStore () {
             <option value="5">$$$$$</option>
           </select>
         </div>
-        <button onClick={handleSubmit} type="submit" className="btn btn-primary form-button">
+        <button className="btn btn-primary form-button" type="submit">
           Submit
         </button>
       </form>
