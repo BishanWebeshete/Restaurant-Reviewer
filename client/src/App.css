@@ -15,7 +15,7 @@
 
 .form {
   background-color: white;
-  max-width: 80%;
+  max-width: 70%;
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -80,6 +80,7 @@ tbody {
 
 .list-group {
   padding-left: 1rem;
+  max-width: 75%;
 }
 
 .td-blue {
@@ -95,15 +96,12 @@ tbody {
   cursor: pointer;
 }
 
-@media screen and (max-width: 992px) {
-  .store-form {
-    max-width: 70%;
-  }
-}
-
-@media screen and (max-width: 515px) {
+@media screen and (max-width: 1024px) {
   .list-group {
     max-width: 90%;
     overflow-x: scroll;
+  }
+  .form {
+    max-width: 85%;
   }
 }
