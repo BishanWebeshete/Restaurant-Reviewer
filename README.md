@@ -20,12 +20,12 @@ Try the application live at: https://retail-rater.azurewebsites.net/
 
 ## Features
 
-- User can view existing restaurants and its details
-- User can add a restaurant
-- User can view reviews on each restaurant
-- User can add a review to each restaurant
-- User can delete restaurants from screen
-- User can update restaurant details
+- User can view existing stores and their details
+- User can add a store
+- User can view reviews on each store
+- User can add a review to each store
+- User can delete stores from screen
+- User can update store details
 
 ## Preview
 
