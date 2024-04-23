@@ -29,9 +29,9 @@ Try the application live at: https://retail-rater.azurewebsites.net/
 
 ## Preview
 
-![Retail-Rater](client/public/Kapture%202024-04-23%20at%2010.40.21.gif)
+![Retail-Rater](client/public/Kapture%202024-04-23%20at%2011.03.12.gif)
 
-![Retail-Rater](client/public/Kapture%202024-04-23%20at%2010.50.43.gif)
+![Retail-Rater](client/public/Kapture%202024-04-23%20at%2011.08.20.gif)
 
 ## Stretch Feature(s)
 
